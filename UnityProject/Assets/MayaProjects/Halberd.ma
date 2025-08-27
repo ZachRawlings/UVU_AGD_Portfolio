@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: Halberd.ma
-//Last modified: Wed, Aug 27, 2025 10:12:36 AM
+//Last modified: Wed, Aug 27, 2025 11:40:50 AM
 //Codeset: 1252
 requires maya "2025ff03";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiImagerDenoiserOidn"
@@ -11,18 +11,18 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202505300603-a12e894a3d";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "5DAE1798-4262-B4B7-08AA-A295B682303D";
+fileInfo "UUID" "C96872A7-410E-0E3A-8DD9-1A929B2B85A2";
 createNode transform -s -n "persp";
 	rename -uid "1B25FB6D-4CB1-473C-EB5D-47957ACC6F8C";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -6.9296040918444834 4.5469725083793824 1.1501658200389069 ;
+	setAttr ".t" -type "double3" -19.7879854528877 12.674290232737901 3.6961938905148246 ;
 	setAttr ".r" -type "double3" 328.20000000000886 281.19999999998208 -1.6374831030102006e-14 ;
 	setAttr ".rpt" -type "double3" 3.1351249473286584e-18 2.5721571946916877e-19 3.0949155725384979e-19 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "762C69BD-45D6-0AF6-8679-BFB2BF746B04";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 8.5571760452473171;
+	setAttr ".coi" 23.98032499591115;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -1609,20 +1609,20 @@ createNode mesh -n "HeadShape" -p "Head";
 	setAttr ".pd[0]" -type "dataPolyComponent" Index_Data UV 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "03B8FD36-444C-609E-973C-9590A2AED008";
+	rename -uid "E4D2E4E5-4470-A1DD-D6AB-49A2F590C930";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "D812B2C0-467C-62B9-F0FE-018D5F2362CA";
+	rename -uid "8436DDE1-4D81-7AA5-9679-298A4B48120C";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "95D9F7B3-4201-FEEB-284F-F3B0BEE04311";
+	rename -uid "BB03E79D-4AE3-6A56-5307-84953605787E";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "C4E67664-4A54-FB1B-B394-38940A889A4A";
+	rename -uid "A2DA60B5-4ACC-B218-9E75-7CBABC1A2E95";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "0870C91C-4F9F-AC41-F3F3-53ACC652903C";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "DEC34052-4E4C-261A-23E4-A3925EE4E330";
+	rename -uid "896C9769-4AD3-D64A-38BA-2B90C3851CCA";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "4D83DAEF-475B-B325-F40A-C2944AFA5DA1";
 	setAttr ".g" yes;
