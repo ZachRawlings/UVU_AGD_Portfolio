@@ -225,3 +225,7 @@ crashlytics-build.properties
 *.png
 
 *.meta
+
+UnityProject/Assets/Brawl Arena/
+
+UnityProject/Assets/Mini Simple Characters Skeleton Demo/
