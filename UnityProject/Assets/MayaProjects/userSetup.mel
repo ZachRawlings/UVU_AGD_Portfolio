@@ -1,0 +1,12 @@
+// Create house
+polyCube -w 6 -h 4 -d 6 -name "houseBody";
+move 0 2 0;
+
+// Create roof
+polyCone -r 4.5 -h 3 -sx 4 -name "houseRoof";
+rotate 0 45 0;  // Rotate to align
+move 0 5.5 0;   // Position on house
+
+// Create door
+polyCube -w 1.2 -h 2 -d 0.2 -name "houseDoor";
+move 0 1 -3.1;
