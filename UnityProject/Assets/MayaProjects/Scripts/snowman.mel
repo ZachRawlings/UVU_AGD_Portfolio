@@ -1,0 +1,17 @@
+// Create three spheres for the body
+sphere -n "snowman_bottom" -r 4;
+move 0 4 0;
+
+sphere -n "snowman_middle" -r 3;
+move 0 11 0;
+
+sphere -n "snowman_head" -r 2;
+move 0 16 0;
+
+// Create left arm (cylinder)
+cylinder -n "left_arm" -r 0.5 -h 6 -ax 1 0 0 -sx 8 -sy 1 -sz 1;
+move -5 11 0;
+
+// Create right arm (cylinder)
+cylinder -n "right_arm" -r 0.5 -h 6 -ax 1 0 0 -sx 8 -sy 1 -sz 1;
+move 5 11 0;
