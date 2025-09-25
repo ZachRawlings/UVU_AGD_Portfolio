@@ -1,0 +1,98 @@
+// Calculator.mel
+global proc float math_sum(float $input[])
+{
+    float $result= 0;
+    for ($i=0; $i<size($input); $i++)
+    {
+        $result += $input[$i];
+    }
+    return $result;
+}
+
+global proc float math_diff(float $input[])
+{
+    float $result= 0;
+    for ($i=0; $i<size($input); $i++)
+    {
+        $result -= $input[$i];
+    }
+    return $result;
+}
+
+global proc float math_mean(float $input[])
+{
+    float $sum = math_sum($input);
+    return $sum / size($input);
+}
+
+global proc float math_median(float $input[])
+{
+    int $size = size($input);
+    float $sorted[] = `sort $input`;
+    if ($size % 2 == 0)
+    {
+        return ($sorted[$size/2 - 1] + $sorted[$size/2]) / 2;
+    }
+    else
+    {
+        return $sorted[$size/2];
+    }
+}
+
+global proc float  math_mult(float $input[])
+{
+    float $result= 1;
+    for ($i=0; $i<size($input); $i++)
+    {
+        $result *= $input[$i];
+    }
+    return $result;
+}
+
+global proc float math_div(float $input[])
+{
+    if (size($input) == 0) return 0;
+    float $result= $input[0];
+    for ($i=1; $i<size($input); $i++)
+    {
+        if ($input[$i] == 0)
+        {
+            error("Division by zero");
+            return 0;
+        }
+        $result /= $input[$i];
+    }
+    return $result;
+}
+
+global proc Calculator(string $funct, float $arry[])
+{
+    if($funct == "sum")
+    {
+        print("Sum: " + math_sum($arry));
+    }
+    else if($funct == "diff")
+    {
+        print("Difference: " + math_diff($arry));
+    }
+    else if($funct == "mean")
+    {
+        print("Mean: " + math_mean($arry));
+    }
+    else if($funct == "median")
+    {
+        print("Median: " + math_median($arry));
+    }
+    else if($funct == "mult")
+    {
+        print("Multiplication: " + math_mult($arry));
+    }
+    else if($funct == "div")
+    {
+        print("Division: " + math_div($arry));
+    }
+    else
+    {
+        print("Function not recognized");
+    }
+}
