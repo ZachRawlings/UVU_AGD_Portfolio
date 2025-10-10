@@ -1,0 +1,34 @@
+string $window = `window -title "ourWindow" -widthHeight 300 250`;
+gridLayout-numberOfColumns 2 -cellWidthHeight 150 50;
+        text -label "number of objects";
+        intField copies;
+        text -label "x coord:" - bgc 1 0 0;
+        floatField xfield;
+        text -label "y coord:"  - bgc 0 1 0;
+        floatField yfield;
+        text -label "z coord:" - bgc 0 0 1;
+        floatField zfield;
+        button -label "run" -c "myfunction()";
+showWindow $window;
+
+global proc myfunction()
+{
+    float $xval = `floatField -q -v xfield`;
+    float $yval = `floatField -q -v yfield`;
+    float $zval = `floatField -q -v zfield`;
+    int $numval = `intField -q -v copies`
+    string $selection[]  = `ls  -sl`;
+
+    if (size($selection)== 0)
+    {
+        error "please select an object";
+    }
+    else
+    {
+        for ($i = 0; $i < $numval; $i++)
+        {
+            duplicate $selection[0];
+            move ($xval) ($yval) ($zval);
+        }
+    }
+}
