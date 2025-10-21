@@ -1,34 +1,90 @@
-string $window = `window -title "ourWindow" -widthHeight 300 250`;
-gridLayout-numberOfColumns 2 -cellWidthHeight 150 50;
-        text -label "number of objects";
-        intField copies;
-        text -label "x coord:" - bgc 1 0 0;
-        floatField xfield;
-        text -label "y coord:"  - bgc 0 1 0;
-        floatField yfield;
-        text -label "z coord:" - bgc 0 0 1;
-        floatField zfield;
-        button -label "run" -c "myfunction()";
-showWindow $window;
-
-global proc myfunction()
+global proc randomDuplicateObjects(
+    int $numDuplicates,
+    float $minX, float $maxX,
+    float $minY, float $maxY,
+    float $minZ, float $maxZ)
 {
-    float $xval = `floatField -q -v xfield`;
-    float $yval = `floatField -q -v yfield`;
-    float $zval = `floatField -q -v zfield`;
-    int $numval = `intField -q -v copies`
-    string $selection[]  = `ls  -sl`;
+    string $selection[] = `ls -sl`;
 
-    if (size($selection)== 0)
+    if (size($selection) == 0)
     {
-        error "please select an object";
+        warning "No objects selected. Please select at least one object first.";
+        return;
     }
-    else
+
+    // Create temporary group for duplicates
+    string $group = `group -em -name "randomDuplicates_grp"`;
+
+    for ($obj in $selection)
     {
-        for ($i = 0; $i < $numval; $i++)
+        for ($i = 0; $i < $numDuplicates; $i++)
         {
-            duplicate $selection[0];
-            move ($xval) ($yval) ($zval);
+            string $newObj[] = `duplicate -rr $obj`;
+
+            // Random position within given range
+            float $randX = `rand $minX $maxX`;
+            float $randY = `rand $minY $maxY`;
+            float $randZ = `rand $minZ $maxZ`;
+
+            move $randX $randY $randZ $newObj[0];
+
+            // Temporarily parent to group
+            parent $newObj[0] $group;
         }
     }
+
+    // Ungroup all duplicated objects 
+    ungroup $group;
+
+    print ("Successfully created " + $numDuplicates + " duplicates for each selected object.\n");
 }
+
+
+// Function: User Interface
+global proc randomDuplicateUI()
+{
+    if (`window -exists randomDupWin`)
+        deleteUI randomDupWin;
+
+    window -title "Random Duplicate Tool" -widthHeight 320 340 randomDupWin;
+    columnLayout -adjustableColumn true -rowSpacing 8;
+
+    text -label "Duplicate and Randomly Scatter Selected Objects" -align "center";
+    separator -h 10;
+
+    // Number of duplicates
+    text -label "Number of Duplicates:";
+    intField -minValue 1 -value 5 numDupField;
+
+    separator -h 8;
+
+    // X range
+    floatFieldGrp -numberOfFields 2 -label "Min / Max X" -value1 -5 -value2 5 xRangeField;
+    // Y range
+    floatFieldGrp -numberOfFields 2 -label "Min / Max Y" -value1 0 -value2 10 yRangeField;
+    // Z range
+    floatFieldGrp -numberOfFields 2 -label "Min / Max Z" -value1 -5 -value2 5 zRangeField;
+
+    separator -h 15;
+
+    // Button to execute
+    button -label "Duplicate Randomly"
+        -backgroundColor 0.3 0.7 0.3
+        -height 35
+        -command ("int $num = `intField -q -value numDupField`; " +
+                  "float $minX = `floatFieldGrp -q -value1 xRangeField`; " +
+                  "float $maxX = `floatFieldGrp -q -value2 xRangeField`; " +
+                  "float $minY = `floatFieldGrp -q -value1 yRangeField`; " +
+                  "float $maxY = `floatFieldGrp -q -value2 yRangeField`; " +
+                  "float $minZ = `floatFieldGrp -q -value1 zRangeField`; " +
+                  "float $maxZ = `floatFieldGrp -q -value2 zRangeField`; " +
+                  "randomDuplicateObjects($num, $minX, $maxX, $minY, $maxY, $minZ, $maxZ);");
+
+    separator -h 10;
+
+    button -label "Close" -backgroundColor 0.5 0.2 0.2 -height 28 -command "deleteUI randomDupWin";
+
+    showWindow randomDupWin;
+}
+
+randomDuplicateUI();
