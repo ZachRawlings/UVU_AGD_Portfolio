@@ -1326,8 +1326,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.15, y: 1.7196927, z: 1.15}
-  m_Center: {x: 0.026501656, y: 0.027957201, z: 0.007003784}
+  m_Size: {x: 1.2, y: 1.7196927, z: 1.2}
+  m_Center: {x: 0.060511947, y: 0.027957201, z: 0.007003784}
 --- !u!114 &1559894443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,9 +1384,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   triggerHoldTime: 0.01
-  repeatHoldTime: 0.5
-  canRepeat: 0
-  canRepeatWithLimits: 1
+  repeatHoldTime: 0.1
+  canRepeat: 1
+  canRepeatWithLimits: 0
   repeatLimit: 10
 --- !u!1 &2029224972
 GameObject:
