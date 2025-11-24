@@ -15,6 +15,10 @@ public class GhostController : MonoBehaviour
 
     [SerializeField] private ThirdPersonCamera cam;
 
+    // 🔦 Flashlight
+    [Header("Flashlight")]
+    public Light flashlight;   // assign in Inspector
+
     private static readonly int IdleState = Animator.StringToHash("Base Layer.idle");
     private static readonly int MoveState = Animator.StringToHash("Base Layer.move");
 
@@ -35,6 +39,9 @@ public class GhostController : MonoBehaviour
         // Sprint (hold to sprint)
         input.Player.Sprint.started  += ctx => sprintHeld = true;
         input.Player.Sprint.canceled += ctx => sprintHeld = false;
+
+        // 🔦 Flashlight toggle
+        input.Player.Flashlight.started += ctx => ToggleFlashlight();
     }
 
     void OnEnable()  => input.Enable();
@@ -44,9 +51,7 @@ public class GhostController : MonoBehaviour
     {
         // Pass mouse delta to camera
         if (cam != null)
-        {
             cam.SetLookInput(lookInput);
-        }
 
         HandleMovement();
     }
@@ -79,5 +84,11 @@ public class GhostController : MonoBehaviour
             anim.CrossFade(moving ? MoveState : IdleState, 0.1f, 0);
         }
     }
-}
 
+    // 🔦 FLASHLIGHT TOGGLE
+    private void ToggleFlashlight()
+    {
+        if (flashlight != null)
+            flashlight.enabled = !flashlight.enabled;
+    }
+}
