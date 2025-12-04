@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3229777113355771365
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 18.911127
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 18.911127
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 18.911127
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.9441385
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.021367
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.523
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a39ba0c1476a9f84d9234c5b27710da5, type: 2}
+    - target: {fileID: 919132149155446097, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      propertyPath: m_Name
+      value: Game Key
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5084424598169651188}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6794600681692898451}
+  m_SourcePrefab: {fileID: 100100000, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+--- !u!1 &2311209716028334260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b65708eb5131c98419e542a4404d316b, type: 3}
+  m_PrefabInstance: {fileID: 3229777113355771365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5084424598169651188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311209716028334260}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.030000009, y: 0.009510582, z: 0.06861859}
+  m_Center: {x: 4.656614e-10, y: -2.328307e-10, z: 0.0038065305}
+--- !u!114 &6794600681692898451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311209716028334260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a28a400391344b9c88e28b4820b5ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerEventsBehaviour
+  startHoldTime: 0.1
+  awakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2311209716028334260}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: a0593512d1616e642bbe26e54c8f7757, type: 2}
+        m_TargetAssemblyTypeName: IntData, Assembly-CSharp
+        m_MethodName: IncrementValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerEnterRepeatEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEnterEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  enterHoldTime: 0.01
+  repeatHoldTime: 0.01
+  exitHoldTime: 0.01
+  canRepeat: 0
+  canRepeatWithLimits: 0
+  repeatLimit: 10
