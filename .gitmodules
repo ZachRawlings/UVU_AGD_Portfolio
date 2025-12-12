@@ -1,6 +1,3 @@
 [submodule "UnityProject/Assets/tools"]
 	path = UnityProject/Assets/tools
 	url = https://github.com/anthonyromrell/ArtisanDream.Tools.git
-[submodule "Simple Puzzle Game/Assets/dreamtools"]
-	path = Simple Puzzle Game/Assets/dreamtools
-	url = https://github.com/anthonyromrell/ArtisanDream.Tools.git
