@@ -1,6 +1,10 @@
 //Maya ASCII 2025ff03 scene
 //Name: SurgeryLights.ma
+<<<<<<< Updated upstream
 //Last modified: Thu, Jan 08, 2026 11:30:06 AM
+=======
+//Last modified: Tue, Jan 13, 2026 09:20:27 AM
+>>>>>>> Stashed changes
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -12,6 +16,7 @@ fileInfo "application" "maya";
 fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202505300603-a12e894a3d";
+<<<<<<< Updated upstream
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
 fileInfo "UUID" "CF6804B8-4648-0DBC-FF50-699D7FEFCA90";
 createNode transform -s -n "persp";
@@ -19,17 +24,34 @@ createNode transform -s -n "persp";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 0.53343908856013567 5.5313700444186438 -2.4286382052051882 ;
 	setAttr ".r" -type "double3" -449.99999999961159 174.40000000003093 0 ;
+=======
+fileInfo "osv" "Windows 11 Home v2009 (Build: 26200)";
+fileInfo "UUID" "CF91926D-4814-A39A-8EE5-DB9DEB89512D";
+createNode transform -s -n "persp";
+	rename -uid "C2D539FF-4EA9-38A3-B3CE-49BD35E86C32";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 1.499324786240507 -6.5690976640978826 3.4722449285521755 ;
+	setAttr ".r" -type "double3" 68.399999999977879 403.99999999997118 0 ;
+>>>>>>> Stashed changes
 	setAttr ".rpt" -type "double3" 4.6728700243186385e-15 4.7050904544853132e-16 4.4733615328129174e-15 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "30864787-4A99-2049-917A-BF9125BE2370";
 	setAttr -k off ".v" no;
 	setAttr ".pze" yes;
 	setAttr ".fl" 34.999999999999979;
+<<<<<<< Updated upstream
 	setAttr ".coi" 1.515958309864023;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
 	setAttr ".tp" -type "double3" -1.763063371181488 4.0154117345809937 1.2532227039337158 ;
+=======
+	setAttr ".coi" 12.760551142512274;
+	setAttr ".imn" -type "string" "persp";
+	setAttr ".den" -type "string" "persp_depth";
+	setAttr ".man" -type "string" "persp_mask";
+	setAttr ".tp" -type "double3" -2.0392569580669679 3.488000916699693 1.7741240709802242 ;
+>>>>>>> Stashed changes
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
 	rename -uid "2E1B9E6B-4CA7-0709-FDEC-689531BA66EF";
@@ -2304,6 +2326,7 @@ createNode transform -n "RightLight";
 createNode mesh -n "RightLightShape" -p "RightLight";
 	rename -uid "FCF2DE77-4B11-4422-5302-028E29FBF2DB";
 	setAttr -k off ".v";
+<<<<<<< Updated upstream
 	setAttr -s 2 ".iog[0].og";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -2317,6 +2340,8 @@ createNode mesh -n "polySurfaceShape10" -p "RightLight";
 	rename -uid "DDA15558-4E64-B2A8-ECCC-45AEDD96B22B";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
+=======
+>>>>>>> Stashed changes
 	setAttr ".iog[0].og[0].gcl" -type "componentList" 1 "f[0:425]";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -3624,6 +3649,7 @@ createNode transform -n "RightHandle";
 createNode mesh -n "RightHandleShape" -p "RightHandle";
 	rename -uid "22ADE121-472F-F2FB-0CE0-A8A9FD8C67E5";
 	setAttr -k off ".v";
+<<<<<<< Updated upstream
 	setAttr -s 2 ".iog[0].og";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -3637,6 +3663,8 @@ createNode mesh -n "polySurfaceShape11" -p "RightHandle";
 	rename -uid "142F0D8D-4206-92FE-9055-9A88F1A40DF8";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
+=======
+>>>>>>> Stashed changes
 	setAttr ".iog[0].og[0].gcl" -type "componentList" 1 "f[0:95]";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -4288,6 +4316,7 @@ createNode transform -n "LeftHandle1";
 createNode mesh -n "LeftHandleShape1" -p "LeftHandle1";
 	rename -uid "03D484D4-4C4D-183E-829E-DDB11527B73C";
 	setAttr -k off ".v";
+<<<<<<< Updated upstream
 	setAttr -s 2 ".iog[0].og";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -4301,6 +4330,8 @@ createNode mesh -n "polySurfaceShape9" -p "LeftHandle1";
 	rename -uid "53FBB971-438F-FC69-DEE6-829AAB3818AB";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
+=======
+>>>>>>> Stashed changes
 	setAttr ".iog[0].og[0].gcl" -type "componentList" 1 "f[0:424]";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -5682,6 +5713,7 @@ createNode mesh -n "polySurfaceShape13" -p "LLightToHandle2";
 	setAttr ".pd[0]" -type "dataPolyComponent" Index_Data UV 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
+<<<<<<< Updated upstream
 	rename -uid "21EAC8E7-4A50-F7CE-6621-6CB134269D68";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
@@ -5691,11 +5723,26 @@ createNode poseInterpolatorManager -n "poseInterpolatorManager";
 	rename -uid "EE894AEC-4724-B4EC-F4A4-679E2BD31D34";
 createNode displayLayerManager -n "layerManager";
 	rename -uid "631B0CD0-4670-23A3-AF91-589CB189CD93";
+=======
+	rename -uid "9DEF5076-4032-62CF-1CAD-08A7F8B0EBD6";
+	setAttr -s 2 ".lnk";
+	setAttr -s 2 ".slnk";
+createNode shapeEditorManager -n "shapeEditorManager";
+	rename -uid "963B0D9A-4F50-540E-300C-82B1280F8374";
+createNode poseInterpolatorManager -n "poseInterpolatorManager";
+	rename -uid "C5E92581-49C8-6C35-2DB6-6287A7BF93FF";
+createNode displayLayerManager -n "layerManager";
+	rename -uid "2B55D5FA-4C2A-41D8-5712-3893198318D1";
+>>>>>>> Stashed changes
 createNode displayLayer -n "defaultLayer";
 	rename -uid "84AE1675-4F44-3B1F-FF6E-2B9E4D393937";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
+<<<<<<< Updated upstream
 	rename -uid "35CF955F-49BF-ACEF-C644-529FF2C1F8B9";
+=======
+	rename -uid "8F4DBCD9-42F0-C1EF-83AA-A3AAAC9F7833";
+>>>>>>> Stashed changes
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "C7BB13E9-4FE2-1276-CFFC-48BB008B1AB8";
 	setAttr ".g" yes;
