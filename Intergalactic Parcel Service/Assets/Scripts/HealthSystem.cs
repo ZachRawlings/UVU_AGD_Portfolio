@@ -24,6 +24,7 @@ public class HealthSystem : MonoBehaviour
         health.Value -= dmg;
 
         if (health.Value <= 0)
-            runFailed?.Raise();
+            Debug.Log("[Health] Run failed");
+        runFailed?.Raise();
     }
 }

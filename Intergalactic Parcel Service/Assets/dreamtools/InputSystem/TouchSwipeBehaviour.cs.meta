@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 3ad95dbc0d5ee41de96932770e743def
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - controls: {fileID: 11400000, guid: c6f246e87654e6544ba69f1c87d118d3, type: 2}
+  - touchData: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
