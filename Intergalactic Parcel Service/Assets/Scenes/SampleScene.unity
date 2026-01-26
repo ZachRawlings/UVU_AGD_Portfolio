@@ -1464,9 +1464,9 @@ MonoBehaviour:
   - 0
   - 2
   rowOffsetY: 1.2
-  weightAsteroid: 0.75
-  weightPackageA: 0.125
-  weightPackageB: 0.125
+  weightAsteroid: 0.9
+  weightPackageA: 0.05
+  weightPackageB: 0.05
   destroyBehindDistance: 25
 --- !u!4 &1802350628
 Transform:
