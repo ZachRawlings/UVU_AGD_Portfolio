@@ -1453,8 +1453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunnerSpawner
   player: {fileID: 1896904253}
-  asteroidPrefab: {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
-  packageAPrefab: {fileID: 8092272368976777395, guid: 5f878f1425221524d91f88b0cef05b6f, type: 3}
+  asteroidPrefab: {fileID: 6252840374785252207, guid: 0eefd915e9340c449a9099b359980bc4, type: 3}
+  packageAPrefab: {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
   packageBPrefab: {fileID: 2029477118467662059, guid: d533a8150f927ac40b4554492843a7ef, type: 3}
   startAhead: 30
   keepAheadDistance: 90
@@ -1464,9 +1464,9 @@ MonoBehaviour:
   - 0
   - 2
   rowOffsetY: 1.2
-  weightAsteroid: 0.9
-  weightPackageA: 0.05
-  weightPackageB: 0.05
+  weightAsteroid: 0.5
+  weightPackageA: 0.25
+  weightPackageB: 0.25
   destroyBehindDistance: 25
 --- !u!4 &1802350628
 Transform:
