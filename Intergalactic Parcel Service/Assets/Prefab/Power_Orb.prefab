@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6.6069913
+      value: 3.4301515
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6.6069913
+      value: 3.4301515
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6.6069913
+      value: 3.4301515
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.947
+      value: 2.9471
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0062906
+      value: 0.0063727
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f27397f5077187149937501552334f7e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74,6 +74,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f27397f5077187149937501552334f7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2226046499604773772}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f27397f5077187149937501552334f7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 229036297122984731}
   m_SourcePrefab: {fileID: 100100000, guid: f27397f5077187149937501552334f7e, type: 3}
 --- !u!1 &6075223812468990976 stripped
 GameObject:
@@ -114,5 +117,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RaiseActionOnPlayerTrigger
   playerTag: Player
-  onTriggered: {fileID: 11400000, guid: a0d434714eb6b224b99c1455bd91fc2a, type: 2}
+  onTriggered: {fileID: 11400000, guid: 99ccff9cdda20c54fb6f71274ad562dd, type: 2}
   destroyAfterTrigger: 1
+--- !u!114 &229036297122984731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075223812468990976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
+  action: {fileID: 11400000, guid: 99ccff9cdda20c54fb6f71274ad562dd, type: 2}
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  respondEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 99b113b12203540d492d2d94ec50daf4, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 0551a35b6b9fef74daf55089546585b1, type: 2}
+          m_ObjectArgumentAssemblyTypeName: FloatData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  respondLateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 99b113b12203540d492d2d94ec50daf4, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 6fc36dd41312aef4893627d50eb7018a, type: 2}
+          m_ObjectArgumentAssemblyTypeName: FloatData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  holdTime: 15

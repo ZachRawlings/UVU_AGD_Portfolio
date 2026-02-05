@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,10 @@ public class TouchSwipeBehaviour : MonoBehaviour
     [Tooltip("Max time in seconds between press and release to count as swipe.")]
     public float maxSwipeTime = 0.35f;
 
+    [Tooltip("Time delay between swipes to prevent multiple swipe detection.")]
+    private bool canSwipe = true;
+    public float swipeCooldown = 0.12f;   
+    
     [Header("Output")]
     public TouchData touchData;
     public event Action<TouchData> sendTouchData;
@@ -100,8 +105,19 @@ public class TouchSwipeBehaviour : MonoBehaviour
 
         ComputeSwipe();
 
+        if (!canSwipe) return;
+        canSwipe = false;
+        StartCoroutine(SwipeCooldown());
+        
         if (swipeDistance >= minSwipeDistance && swipeTime <= maxSwipeTime)
             sendTouchData?.Invoke(touchData);
+          
+        
+    }
+    private IEnumerator SwipeCooldown()
+    {
+        yield return new WaitForSeconds(swipeCooldown);
+        canSwipe = true;
     }
 
     private void SetTouchStartPosition(InputAction.CallbackContext ctx)
@@ -127,6 +143,16 @@ public class TouchSwipeBehaviour : MonoBehaviour
             touchData.direction = delta.normalized;
         else
             touchData.direction = Vector2.zero;
+        if(Mathf.Abs(touchData.direction.x) > Mathf.Abs(touchData.direction.y))
+        {
+            touchData.direction.y = 0;
+            touchData.direction.x = Mathf.Sign(touchData.direction.x);
+        }
+        else
+        {
+            touchData.direction.x = 0;
+            touchData.direction.y = Mathf.Sign(touchData.direction.y);
+        }
     }
 
     private static Vector2 ReadVector2Safe(InputAction action)

@@ -20,6 +20,11 @@ public class HUDPresenter : MonoBehaviour
         text = GetComponent<TMP_Text>();
     }
 
+    private void Awake()
+    {
+        if (!text) text = GetComponent<TMP_Text>();
+    }
+
     private void Update()
     {
         if (!text) return;
@@ -30,7 +35,6 @@ public class HUDPresenter : MonoBehaviour
         int bReq  = reqB  ? reqB.Value  : 0;
         int hp    = health ? health.Value : 0;
 
-        // Minimal, readable
         text.text =
             $"A {aHave}/{aReq}\n" +
             $"B {bHave}/{bReq}\n" +

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spawnercript: MonoBehaviour
+public class SpawnerScript: MonoBehaviour
 {
     [Header("References")]
     public Transform player;
