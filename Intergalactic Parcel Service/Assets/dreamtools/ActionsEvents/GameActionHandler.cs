@@ -50,8 +50,8 @@ public class GameActionHandler : MonoBehaviour
         InvokeEvent(respondLateEvent);
     }
 
-    private void OnDestroy()
+    /*private void OnDestroy()
     {
         action.RaiseNoArgs = null;
-    }
+    }*/
 }
