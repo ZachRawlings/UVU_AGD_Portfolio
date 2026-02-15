@@ -1257,7 +1257,7 @@ MonoBehaviour:
   keepAheadDistance: 90
   spawnSpacing: 10
   rowIndices: ffffffff0000000001000000
-  rowOffsetY: 1.2
+  rowOffsetY: 1
   laneXPositions:
   - -2
   - 0
@@ -1300,11 +1300,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RandomizeIntData
   targets:
   - data: {fileID: 11400000, guid: f9c171a236ef23948878d98d48edcbcb, type: 2}
-    min: 1
-    max: 5
+    min: 5
+    max: 15
   - data: {fileID: 11400000, guid: bf42ba86000407947917bded0356721f, type: 2}
-    min: 1
-    max: 5
+    min: 5
+    max: 15
 --- !u!114 &744970849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2873,20 +2873,20 @@ MonoBehaviour:
   - {fileID: 6252840374785252207, guid: 0eefd915e9340c449a9099b359980bc4, type: 3}
   startAhead: 30
   keepAheadDistance: 90
-  spawnSpacing: 8
+  spawnSpacing: 15
   rowIndices: ffffffff0000000001000000
   rowOffsetY: 1
   laneXPositions:
   - -2
   - 0
   - 2
-  mode: 0
+  mode: 1
   enablePatternCycling: 0
   modeSwitchChance: 0.15
   minModeSteps: 2
   maxModeSteps: 4
   clusterMin: 2
-  clusterMax: 3
+  clusterMax: 5
   guaranteeSafeCell: 1
   destroyBehindDistance: 25
 --- !u!1 &1885296784
@@ -3074,9 +3074,10 @@ MonoBehaviour:
   player: {fileID: 1896904253}
   prefabs:
   - {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
+  - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
   startAhead: 30
   keepAheadDistance: 90
-  spawnSpacing: 1000
+  spawnSpacing: 25
   rowIndices: ffffffff0000000001000000
   rowOffsetY: 1.2
   laneXPositions:
