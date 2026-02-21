@@ -23,7 +23,7 @@ public class IntData : ScriptableObject
 
     public void UpdateValue(int amount)
     {
-        value += amount;
+        Value += amount;
     }
 
     public void SetValue(IntData data)

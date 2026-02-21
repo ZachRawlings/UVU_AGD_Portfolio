@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class AheadSpawner : MonoBehaviour
 {
+    [Header("Overlap Prevention")]
+    public bool preventCrossSpawnerOverlaps = true;
+    [Tooltip("How many Z steps behind the player to keep reservations for.")]
+    public int reservationKeepStepsBehind = 8;
     public enum SpawnMode
     {
         Single,               // 1 spawn per step
@@ -122,6 +126,8 @@ public class AheadSpawner : MonoBehaviour
     // Call repeatedly (event-driven) to keep content spawned ahead of the player
     public void TrySpawnAhead()
     {
+        int playerZIndex = Mathf.FloorToInt(player.position.z / spawnSpacing);
+        SpawnCellReserve.Cleanup(playerZIndex - reservationKeepStepsBehind);
         if (!player) return;
 
         float targetZ = player.position.z + keepAheadDistance;
@@ -306,18 +312,26 @@ public class AheadSpawner : MonoBehaviour
         var prefab = prefabs[Random.Range(0, prefabs.Length)];
         if (!prefab) return;
 
+        // Quantize Z to a consistent step index so all spawners agree
+        int zIndex = Mathf.RoundToInt(z / spawnSpacing);
+
+        if (preventCrossSpawnerOverlaps)
+        {
+            // If another spawner already used this cell at this Z, skip it.
+            if (!SpawnCellReserve.TryReserve(zIndex, rowArrayIndex, laneIndex))
+                return;
+        }
+
         float x = laneXPositions[laneIndex];
         float y = player.position.y + rowIndices[rowArrayIndex] * rowOffsetY;
 
         var go = Instantiate(prefab, new Vector3(x, y, z), Quaternion.identity);
 
-        // Optional cleanup helper (if you already have your own, remove this block)
         var d = go.GetComponent<DestroyWhenBehindPlayer>();
         if (d == null) d = go.AddComponent<DestroyWhenBehindPlayer>();
         d.player = player;
         d.destroyBehindDistance = destroyBehindDistance;
     }
-
     private static void Shuffle<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)

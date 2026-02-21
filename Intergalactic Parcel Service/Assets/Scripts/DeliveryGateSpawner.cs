@@ -17,13 +17,14 @@ public class DeliveryGateSpawner : MonoBehaviour
     {
         if (!player || !gatePrefab) return;
 
-        // Don’t spawn multiple gates if event fires again
+        // If gate object got destroyed externally, clear the reference
+        if (activeGate == null) activeGate = null;
+
         if (activeGate != null) return;
 
         Vector3 pos = new Vector3(laneX, player.position.y + yOffset, player.position.z + spawnAhead);
         activeGate = Instantiate(gatePrefab, pos, Quaternion.identity);
 
-        // Make sure it cleans up if player somehow passes it
         var d = activeGate.GetComponent<DestroyWhenBehindPlayer>();
         if (d == null) d = activeGate.AddComponent<DestroyWhenBehindPlayer>();
         d.player = player;

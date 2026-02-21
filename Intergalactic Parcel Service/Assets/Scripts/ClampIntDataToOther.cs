@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ClampIntDataToOther : MonoBehaviour
 {
-    public IntData value;      // e.g. HaveA
-    public IntData maxSource;  // e.g. RequiredA
+    public IntData value;      // HaveA / HaveB
+    public IntData maxSource;  // ReqA / ReqB
 
     public void Clamp()
     {
@@ -11,5 +11,11 @@ public class ClampIntDataToOther : MonoBehaviour
 
         if (value.Value > maxSource.Value)
             value.SetValue(maxSource.Value);
+    }
+
+    public bool IsFull()
+    {
+        if (!value || !maxSource) return false;
+        return value.Value >= maxSource.Value;
     }
 }

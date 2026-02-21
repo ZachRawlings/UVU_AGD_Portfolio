@@ -46,6 +46,11 @@ public class DeliveryProgressSystem : MonoBehaviour
     }
 
     // Call this later on run reset; for now you can hit Stop/Play.
+    public void ResetLatch()
+    {
+        completedRaised = false;
+    }
+
     public void ResetProgress()
     {
         completedRaised = false;
