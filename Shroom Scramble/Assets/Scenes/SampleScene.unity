@@ -876,7 +876,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -2282,6 +2282,7 @@ MonoBehaviour:
   startAhead: 90
   keepAheadDistance: 90
   spawnSpacing: 25
+  reservationZCellSize: 5
   rowIndices: feffffff0000000002000000
   rowOffsetY: 1
   laneXPositions:
@@ -2560,7 +2561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3265715, g: 0.7433963, b: 0.30717695, a: 0.18039216}
+  m_Color: {r: 0.3265715, g: 0.7433963, b: 0.30717695, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3595,6 +3596,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2027392102}
+        m_TargetAssemblyTypeName: SpawnReservationBridge, Assembly-CSharp
+        m_MethodName: ResetAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1674050993}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3696,6 +3709,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1896904254}
         m_TargetAssemblyTypeName: TransformRest, Assembly-CSharp
         m_MethodName: ResetNow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2027392102}
+        m_TargetAssemblyTypeName: SpawnReservationBridge, Assembly-CSharp
+        m_MethodName: ResetAll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3907,6 +3932,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2027392102}
+        m_TargetAssemblyTypeName: SpawnReservationBridge, Assembly-CSharp
+        m_MethodName: ResetAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 64ff71f6e7f16b54d860feef5c68d57f, type: 2}
         m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
         m_MethodName: Raise
@@ -3942,6 +3979,30 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 2027392099}
+        m_TargetAssemblyTypeName: DestroyByTag, Assembly-CSharp
+        m_MethodName: DestroyAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 17db798ef9befa040bcd282573f43096, type: 2}
+        m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 17db798ef9befa040bcd282573f43096, type: 2}
         m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
         m_MethodName: Raise
@@ -5331,7 +5392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1743028210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5559,6 +5620,7 @@ MonoBehaviour:
   startAhead: 90
   keepAheadDistance: 90
   spawnSpacing: 200
+  reservationZCellSize: 5
   rowIndices: feffffff0000000002000000
   rowOffsetY: 1
   laneXPositions:
@@ -6508,6 +6570,7 @@ GameObject:
   - component: {fileID: 2027392101}
   - component: {fileID: 2027392099}
   - component: {fileID: 2027392100}
+  - component: {fileID: 2027392102}
   m_Layer: 0
   m_Name: DeliverySystem
   m_TagString: Untagged
@@ -6689,6 +6752,18 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: bf42ba86000407947917bded0356721f, type: 2}
     min: 1
     max: 3
+--- !u!114 &2027392102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027392091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfe97f558aea294fa4e42bf172d26d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnReservationBridge
 --- !u!1 &2044523928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7661,6 +7736,7 @@ MonoBehaviour:
   startAhead: 30
   keepAheadDistance: 90
   spawnSpacing: 8
+  reservationZCellSize: 5
   rowIndices: feffffff0000000002000000
   rowOffsetY: 1
   laneXPositions:

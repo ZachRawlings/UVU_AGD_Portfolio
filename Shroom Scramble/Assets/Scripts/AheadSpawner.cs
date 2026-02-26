@@ -48,7 +48,10 @@ public class AheadSpawner : MonoBehaviour
     public float startAhead = 30f;
     public float keepAheadDistance = 90f;
     public float spawnSpacing = 12f;
-
+    
+    [Header("Reservation Grid")]
+    public float reservationZCellSize = 5f; // must be the SAME across all spawners
+    
     [Header("Grid (Rows + Lanes)")]
     // Example: -1,0,1 means 3 rows relative to player Y
     public int[] rowIndices = { -1, 0, 1 };
@@ -126,9 +129,10 @@ public class AheadSpawner : MonoBehaviour
     // Call repeatedly (event-driven) to keep content spawned ahead of the player
     public void TrySpawnAhead()
     {
-        int playerZIndex = Mathf.FloorToInt(player.position.z / spawnSpacing);
-        SpawnCellReserve.Cleanup(playerZIndex - reservationKeepStepsBehind);
         if (!player) return;
+
+        int playerZIndex = Mathf.FloorToInt(player.position.z / reservationZCellSize);
+        SpawnCellReserve.Cleanup(playerZIndex - reservationKeepStepsBehind);
 
         float targetZ = player.position.z + keepAheadDistance;
 
@@ -312,15 +316,15 @@ public class AheadSpawner : MonoBehaviour
         var prefab = prefabs[Random.Range(0, prefabs.Length)];
         if (!prefab) return;
 
-        // Quantize Z to a consistent step index so all spawners agree
-        int zIndex = Mathf.RoundToInt(z / spawnSpacing);
-
         if (preventCrossSpawnerOverlaps)
         {
-            // If another spawner already used this cell at this Z, skip it.
+            // Quantize Z so all spawners agree on the same "step"
+            int zIndex = Mathf.RoundToInt(z / reservationZCellSize);
+
             if (!SpawnCellReserve.TryReserve(zIndex, rowArrayIndex, laneIndex))
-                return;
+                return; // already taken by another spawner at same cell
         }
+        
 
         float x = laneXPositions[laneIndex];
         float y = player.position.y + rowIndices[rowArrayIndex] * rowOffsetY;
