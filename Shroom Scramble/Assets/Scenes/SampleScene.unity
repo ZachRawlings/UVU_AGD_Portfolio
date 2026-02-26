@@ -1803,6 +1803,7 @@ GameObject:
   - component: {fileID: 597017061}
   - component: {fileID: 597017060}
   - component: {fileID: 597017070}
+  - component: {fileID: 597017071}
   m_Layer: 0
   m_Name: CollectibleSpawner
   m_TagString: Untagged
@@ -1865,6 +1866,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1876,7 +1889,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
   m_Name: 
@@ -1915,6 +1928,18 @@ MonoBehaviour:
       - m_Target: {fileID: 597017068}
         m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
         m_MethodName: ResetSpawner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1983,6 +2008,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2006,9 +2043,9 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResumeTimer
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2056,6 +2093,18 @@ MonoBehaviour:
       - m_Target: {fileID: 597017067}
         m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
         m_MethodName: StopRepeatedUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2124,9 +2173,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: StartTimer
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StartDelayForRun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2156,9 +2205,9 @@ MonoBehaviour:
   onFinished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StartRepeatedUpdate
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: OnDelayFinished_StartSpawner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2318,10 +2367,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 597017071}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
   holdTime: 0.1
+--- !u!114 &597017071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597017059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfe98c27afd37649975f54cd6815278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnerDelayController
+  delayTimer: {fileID: 597017066}
+  coroutineBehaviour: {fileID: 597017067}
 --- !u!1 &706581250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,18 +3052,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TimeScaleController, Assembly-CSharp
-        m_MethodName: SetTimeScale
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1071910222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,30 +3184,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1674050993}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TimeScaleController, Assembly-CSharp
-        m_MethodName: SetTimeScale
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1089491058
 MonoBehaviour:
@@ -5447,6 +5486,7 @@ GameObject:
   - component: {fileID: 1885296792}
   - component: {fileID: 1885296791}
   - component: {fileID: 1885296798}
+  - component: {fileID: 1885296799}
   m_Layer: 0
   m_Name: PowerUpSpawner
   m_TagString: Untagged
@@ -5592,6 +5632,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1885296789}
         m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
         m_MethodName: ResetSpawner
@@ -5615,7 +5667,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
   m_Name: 
@@ -5654,6 +5706,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1885296789}
         m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
         m_MethodName: ResetSpawner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5710,6 +5774,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1885296789}
         m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
         m_MethodName: ResetSpawner
@@ -5745,9 +5821,9 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResumeTimer
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5795,6 +5871,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1885296788}
         m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
         m_MethodName: StopRepeatedUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5863,9 +5951,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: StartTimer
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StartDelayForRun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5895,9 +5983,9 @@ MonoBehaviour:
   onFinished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StartRepeatedUpdate
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: OnDelayFinished_StartSpawner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5950,6 +6038,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1885296799}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StopAndReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1885296789}
         m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
         m_MethodName: ResetSpawner
@@ -5966,6 +6066,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   holdTime: 0.1
+--- !u!114 &1885296799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885296784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfe98c27afd37649975f54cd6815278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnerDelayController
+  delayTimer: {fileID: 1885296797}
+  coroutineBehaviour: {fileID: 1885296788}
 --- !u!1 &1893770810
 GameObject:
   m_ObjectHideFlags: 0
@@ -6226,9 +6340,9 @@ MonoBehaviour:
   - 2
   laneIndex: 1
   rowOffsetY: 1.2
-  dodgeDuration: 0.5
-  horizontalLerp: 14
-  verticalLerp: 16
+  dodgeDuration: 0.45
+  horizontalSmoothTime: 0.07
+  verticalSmoothTime: 0.06
 --- !u!54 &1896904251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6784,18 +6898,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TimeScaleController, Assembly-CSharp
-        m_MethodName: Unpause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -7117,6 +7219,7 @@ GameObject:
   - component: {fileID: 2131686469}
   - component: {fileID: 2131686478}
   - component: {fileID: 2131686468}
+  - component: {fileID: 2131686479}
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Untagged
@@ -7320,9 +7423,9 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResumeTimer
+      - m_Target: {fileID: 2131686479}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7370,6 +7473,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2131686475}
         m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
         m_MethodName: StopRepeatedUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2131686479}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7438,9 +7553,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: StartTimer
+      - m_Target: {fileID: 2131686479}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: StartDelayForRun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7470,9 +7585,9 @@ MonoBehaviour:
   onFinished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StartRepeatedUpdate
+      - m_Target: {fileID: 2131686479}
+        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
+        m_MethodName: OnDelayFinished_StartSpawner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7635,6 +7750,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   holdTime: 0.1
+--- !u!114 &2131686479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131686467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfe98c27afd37649975f54cd6815278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnerDelayController
+  delayTimer: {fileID: 2131686474}
+  coroutineBehaviour: {fileID: 2131686475}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -4,78 +4,69 @@ using UnityEngine;
 public class PlayerLaneMover : MonoBehaviour
 {
     [Header("Speed")]
-    public FloatData speed; // Speed_FloatData
+    public FloatData speed;
 
     [Header("Lanes (World X)")]
     public float[] laneXPositions = { -2f, 0f, 2f };
-    [SerializeField] private int laneIndex = 1; // center
+    [SerializeField] private int laneIndex = 1;
 
     [Header("Rows (Y Dodge)")]
-    public float rowOffsetY = 1.2f;     // must match spawner rowOffsetY
-    public float dodgeDuration = 0.18f; // quick “hop”
-    public float horizontalLerp = 14f;
-    public float verticalLerp = 16f;
+    public float rowOffsetY = 1.2f;
+    public float dodgeDuration = 0.18f;
 
-    private float baseY;
-    private float currentDodgeY;
-    private Coroutine dodgeRoutine;
+    [Header("Smoothing")]
+    public float horizontalSmoothTime = 0.07f;
+    public float verticalSmoothTime = 0.06f;
 
-    private void Awake()
+    float baseY;
+    float currentDodgeY;
+    Coroutine dodgeRoutine;
+
+    float zPos;                 // ✅ authoritative forward position
+    float xVel, yVel;           // SmoothDamp velocities
+
+    void Awake()
     {
         baseY = transform.position.y;
         currentDodgeY = 0f;
 
-        // Snap to center lane at start (avoids “starting right lane” confusion)
+        zPos = transform.position.z; // ✅ lock starting z
         SnapToLaneNow();
     }
 
-    private void Update()
+    void Update()
     {
-        // Auto forward
         float spd = (speed != null) ? speed.Value : 10f;
-        transform.position += Vector3.forward * spd * Time.deltaTime;
+
+        // ✅ authoritative forward
+        zPos += spd * Time.deltaTime;
 
         // Smooth lane + row
         float targetX = laneXPositions[Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1)];
         float targetY = baseY + currentDodgeY;
 
         Vector3 p = transform.position;
-        p.x = Mathf.Lerp(p.x, targetX, horizontalLerp * Time.deltaTime);
-        p.y = Mathf.Lerp(p.y, targetY, verticalLerp * Time.deltaTime);
-        transform.position = p;
+
+        float newX = Mathf.SmoothDamp(p.x, targetX, ref xVel, horizontalSmoothTime);
+        float newY = Mathf.SmoothDamp(p.y, targetY, ref yVel, verticalSmoothTime);
+
+        // ✅ write position in one go (prevents any z “rubber band”)
+        transform.position = new Vector3(newX, newY, zPos);
     }
 
-    // --- Event-driven inputs (hook these via GameActionHandler) ---
+    public void OnSwipeLeft()  => laneIndex = Mathf.Max(0, laneIndex - 1);
+    public void OnSwipeRight() => laneIndex = Mathf.Min(laneXPositions.Length - 1, laneIndex + 1);
 
-    public void OnSwipeLeft()
-    {
-        laneIndex = Mathf.Max(0, laneIndex - 1);
-    }
+    public void OnSwipeUp()   => StartDodge(+rowOffsetY);
+    public void OnSwipeDown() => StartDodge(-rowOffsetY);
 
-    public void OnSwipeRight()
-    {
-        laneIndex = Mathf.Min(laneXPositions.Length - 1, laneIndex + 1);
-    }
-
-    public void OnSwipeUp()
-    {
-        StartDodge(+rowOffsetY);
-    }
-
-    public void OnSwipeDown()
-    {
-        StartDodge(-rowOffsetY);
-    }
-
-    // --- Helpers ---
-
-    private void StartDodge(float offset)
+    void StartDodge(float offset)
     {
         if (dodgeRoutine != null) StopCoroutine(dodgeRoutine);
         dodgeRoutine = StartCoroutine(DodgeRoutine(offset));
     }
 
-    private IEnumerator DodgeRoutine(float offset)
+    IEnumerator DodgeRoutine(float offset)
     {
         currentDodgeY = offset;
         yield return new WaitForSeconds(dodgeDuration);
@@ -83,22 +74,26 @@ public class PlayerLaneMover : MonoBehaviour
         dodgeRoutine = null;
     }
 
-    private void SnapToLaneNow()
+    void SnapToLaneNow()
     {
         laneIndex = Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1);
 
-        Vector3 p = transform.position;
+        var p = transform.position;
         p.x = laneXPositions[laneIndex];
         p.y = baseY;
-        transform.position = p;
+        // keep zPos authoritative
+        transform.position = new Vector3(p.x, p.y, zPos);
     }
 
-    // Used later for soft reset
     public void ResetToCenterNow()
     {
         laneIndex = 1;
         baseY = transform.position.y;
         currentDodgeY = 0f;
+
+        // also reset authoritative z
+        zPos = transform.position.z;
+
         SnapToLaneNow();
     }
 }
