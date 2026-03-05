@@ -7,17 +7,19 @@ public class AheadSpawner : MonoBehaviour
     public bool preventCrossSpawnerOverlaps = true;
     [Tooltip("How many Z steps behind the player to keep reservations for.")]
     public int reservationKeepStepsBehind = 8;
+
     public enum SpawnMode
     {
-        Single,               // 1 spawn per step
-        ClusterDifferentRows,  // multiple spawns at same Z on different rows
-        FullRow,              // all lanes on one row
-        FullLane,             // all rows on one lane
-        FullGrid,             // all rows + all lanes (dangerous, use safe cell option)
-        Checkerboard,         // alternating cells
-        ZigZagLane,           // fills a lane column that shifts each step
-        Slalom                // one per row in a shifting lane (diagonal feel)
+        Single,
+        ClusterDifferentRows,
+        FullRow,
+        FullLane,
+        FullGrid,
+        Checkerboard,
+        ZigZagLane,
+        Slalom
     }
+
     [System.Serializable]
     public struct ModeWeight
     {
@@ -48,29 +50,32 @@ public class AheadSpawner : MonoBehaviour
     public float startAhead = 30f;
     public float keepAheadDistance = 90f;
     public float spawnSpacing = 12f;
-    
+
     [Header("Reservation Grid")]
     public float reservationZCellSize = 5f; // must be the SAME across all spawners
-    
+
     [Header("Grid (Rows + Lanes)")]
-    // Example: -1,0,1 means 3 rows relative to player Y
+    // NOTE: rows are relative to a fixed grid Y baseline (NOT player Y)
     public int[] rowIndices = { -1, 0, 1 };
     public float rowOffsetY = 1.2f;
     public float[] laneXPositions = { -2f, 0f, 2f };
 
+    [Header("Grid Baseline Y (Spawner ignores player Y)")]
+    [Tooltip("If true, set grid baseline Y = player's Y ONCE when enabled.")]
+    public bool captureGridYFromPlayerOnEnable = true;
+
+    [Tooltip("If true, grid baseline Y will recapture from player on ResetSpawner(). Usually OFF.")]
+    public bool captureGridYFromPlayerOnReset = false;
+
+    [Tooltip("If captureGridYFromPlayerOnEnable is false, use this world-space Y instead.")]
+    public float gridOriginY = 0f;
+
     [Header("Mode / Patterns")]
     public SpawnMode mode = SpawnMode.Single;
 
-    [Tooltip("If enabled, the spawner will keep the current mode for N steps, then optionally switch.")]
     public bool enablePatternCycling = false;
-
-    [Tooltip("Chance to switch to a random mode each step (only if enablePatternCycling is true).")]
     [Range(0f, 1f)] public float modeSwitchChance = 0.15f;
-
-    [Tooltip("How many spawn steps to keep a mode before forcing a new one (only if enablePatternCycling is true).")]
-    public int minModeSteps = 2;
-
-    [Tooltip("How many spawn steps to keep a mode before forcing a new one (only if enablePatternCycling is true).")]
+    public int minModeSteps = 1;
     public int maxModeSteps = 5;
 
     [Header("Cluster Settings (ClusterDifferentRows)")]
@@ -78,7 +83,6 @@ public class AheadSpawner : MonoBehaviour
     public int clusterMax = 3;
 
     [Header("Safety")]
-    [Tooltip("Guarantee at least one empty cell each spawn step (prevents full blocks).")]
     public bool guaranteeSafeCell = true;
 
     [Header("Cleanup")]
@@ -91,6 +95,9 @@ public class AheadSpawner : MonoBehaviour
     private int zigzagLaneIndex;
     private int slalomOffset;
     private int stepCounter;
+
+    // Fixed baseline for this spawner's Y grid
+    private float gridBaseY;
 
     private void OnEnable()
     {
@@ -115,9 +122,11 @@ public class AheadSpawner : MonoBehaviour
             return;
         }
 
+        // ✅ Capture baseline Y once (or use world Y)
+        gridBaseY = captureGridYFromPlayerOnEnable ? player.position.y : gridOriginY;
+
         nextZ = player.position.z + startAhead;
 
-        // init internal state
         stepCounter = 0;
         zigzagLaneIndex = Random.Range(0, laneXPositions.Length);
         slalomOffset = Random.Range(0, laneXPositions.Length);
@@ -126,7 +135,6 @@ public class AheadSpawner : MonoBehaviour
             PickNewMode();
     }
 
-    // Call repeatedly (event-driven) to keep content spawned ahead of the player
     public void TrySpawnAhead()
     {
         if (!player) return;
@@ -155,20 +163,14 @@ public class AheadSpawner : MonoBehaviour
     private void PickNewMode()
     {
         modeStepsRemaining = Random.Range(minModeSteps, maxModeSteps + 1);
-
-        // If you want weighted patterns later, change selection here.
-        // For now pick a random mode from all values:
-        var values = (SpawnMode[])System.Enum.GetValues(typeof(SpawnMode));
         mode = PickWeightedMode();
 
-        // reset/seed internal state for repeating patterns
         zigzagLaneIndex = Random.Range(0, laneXPositions.Length);
         slalomOffset = Random.Range(0, laneXPositions.Length);
-        
     }
+
     private SpawnMode PickWeightedMode()
     {
-        // If list isn't set up, fall back to current mode (safe)
         if (weightedModes == null || weightedModes.Count == 0)
             return mode;
 
@@ -176,7 +178,6 @@ public class AheadSpawner : MonoBehaviour
         for (int i = 0; i < weightedModes.Count; i++)
             total += Mathf.Max(0, weightedModes[i].weight);
 
-        // If all weights are zero, fall back
         if (total <= 0)
             return mode;
 
@@ -191,7 +192,7 @@ public class AheadSpawner : MonoBehaviour
                 return weightedModes[i].mode;
         }
 
-        return mode; // Shouldn't happen, but safe fallback
+        return mode;
     }
 
     private void SpawnAtZ(float z)
@@ -215,7 +216,6 @@ public class AheadSpawner : MonoBehaviour
             {
                 int count = Mathf.Clamp(Random.Range(clusterMin, clusterMax + 1), 1, rowIndices.Length);
 
-                // unique rows
                 var rows = new List<int>(rowIndices.Length);
                 for (int i = 0; i < rowIndices.Length; i++) rows.Add(i);
                 Shuffle(rows);
@@ -252,7 +252,6 @@ public class AheadSpawner : MonoBehaviour
 
             case SpawnMode.Checkerboard:
             {
-                // Alternate each step: uses stepCounter to flip parity
                 int parity = stepCounter & 1;
                 for (int row = 0; row < rowIndices.Length; row++)
                 for (int lane = 0; lane < laneXPositions.Length; lane++)
@@ -263,7 +262,6 @@ public class AheadSpawner : MonoBehaviour
 
             case SpawnMode.ZigZagLane:
             {
-                // Column that shifts lane each step
                 for (int row = 0; row < rowIndices.Length; row++)
                     Place(row, zigzagLaneIndex);
 
@@ -273,7 +271,6 @@ public class AheadSpawner : MonoBehaviour
 
             case SpawnMode.Slalom:
             {
-                // One per row, lane shifts by row + offset -> diagonal pattern
                 for (int row = 0; row < rowIndices.Length; row++)
                 {
                     int lane = (row + slalomOffset) % laneXPositions.Length;
@@ -294,11 +291,8 @@ public class AheadSpawner : MonoBehaviour
     private void EnsureSafeCell(HashSet<(int rowArrayIndex, int laneIndex)> occupied)
     {
         int totalCells = rowIndices.Length * laneXPositions.Length;
-
-        // If not full, there is already at least one safe cell
         if (occupied.Count < totalCells) return;
 
-        // Remove one random occupied cell to create a gap
         int removeIndex = Random.Range(0, occupied.Count);
         int i = 0;
         (int rowArrayIndex, int laneIndex) toRemove = default;
@@ -315,19 +309,22 @@ public class AheadSpawner : MonoBehaviour
     {
         var prefab = prefabs[Random.Range(0, prefabs.Length)];
         if (!prefab) return;
+        
+        int rowCell = rowIndices[rowArrayIndex];
 
         if (preventCrossSpawnerOverlaps)
         {
-            // Quantize Z so all spawners agree on the same "step"
-            int zIndex = Mathf.RoundToInt(z / reservationZCellSize);
+            int zIndex = Mathf.FloorToInt(z / reservationZCellSize);
 
-            if (!SpawnCellReserve.TryReserve(zIndex, rowArrayIndex, laneIndex))
-                return; // already taken by another spawner at same cell
+            // reserve using rowCell, NOT rowArrayIndex
+            if (!SpawnCellReserve.TryReserve(zIndex, rowCell, laneIndex))
+                return;
         }
-        
 
         float x = laneXPositions[laneIndex];
-        float y = player.position.y + rowIndices[rowArrayIndex] * rowOffsetY;
+
+        // ✅ NO player.position.y here
+        float y = gridBaseY + rowIndices[rowArrayIndex] * rowOffsetY;
 
         var go = Instantiate(prefab, new Vector3(x, y, z), Quaternion.identity);
 
@@ -336,6 +333,7 @@ public class AheadSpawner : MonoBehaviour
         d.player = player;
         d.destroyBehindDistance = destroyBehindDistance;
     }
+
     private static void Shuffle<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -348,6 +346,10 @@ public class AheadSpawner : MonoBehaviour
     public void ResetSpawner()
     {
         if (!player) return;
+
+        if (captureGridYFromPlayerOnReset)
+            gridBaseY = player.position.y;
+
         nextZ = player.position.z + startAhead;
 
         stepCounter = 0;
@@ -357,4 +359,7 @@ public class AheadSpawner : MonoBehaviour
         if (enablePatternCycling)
             PickNewMode();
     }
+
+    // Optional manual override if you want to set it from a scene "track" object
+    public void SetGridBaseY(float y) => gridBaseY = y;
 }

@@ -1,57 +1,76 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerLaneMover : MonoBehaviour
 {
-    [Header("Speed")]
+    [Header("Refs")]
+    public Transform visual;   // drag PlayerVisual here
     public FloatData speed;
 
-    [Header("Lanes (World X)")]
+    [Header("Lanes")]
     public float[] laneXPositions = { -2f, 0f, 2f };
     [SerializeField] private int laneIndex = 1;
 
-    [Header("Rows (Y Dodge)")]
+    [Header("Dodge (visual only)")]
     public float rowOffsetY = 1.2f;
     public float dodgeDuration = 0.18f;
 
     [Header("Smoothing")]
     public float horizontalSmoothTime = 0.07f;
-    public float verticalSmoothTime = 0.06f;
+    public float visualYSmoothTime = 0.06f;
 
-    float baseY;
-    float currentDodgeY;
-    Coroutine dodgeRoutine;
+    private float baseY;                 // ROOT Y (locked)
+    private float zPos;
 
-    float zPos;                 // ✅ authoritative forward position
-    float xVel, yVel;           // SmoothDamp velocities
+    private float xVel;
+
+    private float visualBaseLocalY;      // VISUAL baseline local Y
+    private float visualTargetOffsetY;   // current dodge offset
+    private float visualYVel;
+    private Coroutine dodgeRoutine;
+
+    private Rigidbody rb;
 
     void Awake()
     {
-        baseY = transform.position.y;
-        currentDodgeY = 0f;
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
 
-        zPos = transform.position.z; // ✅ lock starting z
+        baseY = transform.position.y;
+        zPos = transform.position.z;
+
+        if (visual == null && transform.childCount > 0)
+            visual = transform.GetChild(0);
+
+        if (visual != null)
+            visualBaseLocalY = visual.localPosition.y;
+
         SnapToLaneNow();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float spd = (speed != null) ? speed.Value : 10f;
+        zPos += spd * Time.fixedDeltaTime;
 
-        // ✅ authoritative forward
-        zPos += spd * Time.deltaTime;
-
-        // Smooth lane + row
         float targetX = laneXPositions[Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1)];
-        float targetY = baseY + currentDodgeY;
 
-        Vector3 p = transform.position;
-
+        Vector3 p = rb.position;
         float newX = Mathf.SmoothDamp(p.x, targetX, ref xVel, horizontalSmoothTime);
-        float newY = Mathf.SmoothDamp(p.y, targetY, ref yVel, verticalSmoothTime);
 
-        // ✅ write position in one go (prevents any z “rubber band”)
-        transform.position = new Vector3(newX, newY, zPos);
+        // ✅ ROOT Y is hard-locked. No drift possible.
+        rb.MovePosition(new Vector3(newX, baseY, zPos));
+
+        // ✅ Dodge only affects the VISUAL child
+        if (visual != null)
+        {
+            float targetLocalY = visualBaseLocalY + visualTargetOffsetY;
+            var lp = visual.localPosition;
+            float newLocalY = Mathf.SmoothDamp(lp.y, targetLocalY, ref visualYVel, visualYSmoothTime);
+            visual.localPosition = new Vector3(lp.x, newLocalY, lp.z);
+        }
     }
 
     public void OnSwipeLeft()  => laneIndex = Mathf.Max(0, laneIndex - 1);
@@ -60,40 +79,25 @@ public class PlayerLaneMover : MonoBehaviour
     public void OnSwipeUp()   => StartDodge(+rowOffsetY);
     public void OnSwipeDown() => StartDodge(-rowOffsetY);
 
-    void StartDodge(float offset)
+    private void StartDodge(float offset)
     {
+        visualYVel = 0f;
         if (dodgeRoutine != null) StopCoroutine(dodgeRoutine);
         dodgeRoutine = StartCoroutine(DodgeRoutine(offset));
     }
 
-    IEnumerator DodgeRoutine(float offset)
+    private IEnumerator DodgeRoutine(float offset)
     {
-        currentDodgeY = offset;
+        visualTargetOffsetY = offset;
         yield return new WaitForSeconds(dodgeDuration);
-        currentDodgeY = 0f;
+        visualTargetOffsetY = 0f;
         dodgeRoutine = null;
     }
 
-    void SnapToLaneNow()
+    
+    private void SnapToLaneNow()
     {
         laneIndex = Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1);
-
-        var p = transform.position;
-        p.x = laneXPositions[laneIndex];
-        p.y = baseY;
-        // keep zPos authoritative
-        transform.position = new Vector3(p.x, p.y, zPos);
-    }
-
-    public void ResetToCenterNow()
-    {
-        laneIndex = 1;
-        baseY = transform.position.y;
-        currentDodgeY = 0f;
-
-        // also reset authoritative z
-        zPos = transform.position.z;
-
-        SnapToLaneNow();
+        rb.position = new Vector3(laneXPositions[laneIndex], baseY, zPos);
     }
 }
