@@ -5189,7 +5189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DeliveryGateSpawner
   gatePrefab: {fileID: 2933604497545171519, guid: 3385539b6b044814ebb8a61ab74ad9b3, type: 3}
   spawnedParent: {fileID: 1404714404}
-  progress: {fileID: 0}
+  progress: {fileID: 1541770150}
   finishDistance: 300
   spawnLeadDistance: 120
   laneX: 0
