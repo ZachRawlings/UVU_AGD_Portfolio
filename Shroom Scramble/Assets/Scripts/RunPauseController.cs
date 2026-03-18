@@ -6,6 +6,7 @@ public class RunPauseController : MonoBehaviour
     public RunProgressTracker progressTracker;
     public ChunkGenerator chunkGenerator;
     public PlayerLaneMover playerLaneMover;
+    public RunSpeedRamp speedRamp;
 
     public bool IsPaused { get; private set; }
 
@@ -18,6 +19,7 @@ public class RunPauseController : MonoBehaviour
         if (progressTracker != null) progressTracker.PauseRun();
         if (chunkGenerator != null) chunkGenerator.PauseRun();
         if (playerLaneMover != null) playerLaneMover.PauseRun();
+        if (speedRamp != null) speedRamp.PauseRun();
     }
 
     public void ResumeGame()
@@ -29,6 +31,7 @@ public class RunPauseController : MonoBehaviour
         if (progressTracker != null) progressTracker.ResumeRun();
         if (chunkGenerator != null) chunkGenerator.ResumeRun();
         if (playerLaneMover != null) playerLaneMover.ResumeRun();
+        if (speedRamp != null) speedRamp.ResumeRun();
     }
 
     public void TogglePause()

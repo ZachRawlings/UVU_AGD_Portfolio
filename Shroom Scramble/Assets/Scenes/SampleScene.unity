@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 6190016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -276,41 +276,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChunkGenerator
   progress: {fileID: 1541770150}
-  movingWorld: {fileID: 44787245}
-  groundParent: {fileID: 1166217409}
-  spawnedParent: {fileID: 2089354921}
+  groundSpawner: {fileID: 1166217410}
+  gameplaySpawner: {fileID: 2089354923}
   isRunning: 1
-  chunkLength: 20
-  chunksAhead: 8
-  cleanupBehind: 3
-  gameplayXOffset: 0
-  gameplayYOffset: 0
-  groundYOffset: -3
-  laneX:
-  - -2
-  - 0
-  - 2
-  rowY:
-  - -1.5
-  - 0
-  - 1.5
-  groundPrefabs:
-  - {fileID: 3535874599674866434, guid: 1d92d3e23393e854085638d8a29607f5, type: 3}
-  obstaclePrefabs:
-  - {fileID: 6252840374785252207, guid: 0eefd915e9340c449a9099b359980bc4, type: 3}
-  collectiblePrefabs:
-  - {fileID: 2029477118467662059, guid: d533a8150f927ac40b4554492843a7ef, type: 3}
-  - {fileID: 8092272368976777395, guid: 5f878f1425221524d91f88b0cef05b6f, type: 3}
-  powerupPrefabs:
-  - {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
-  - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
-  obstacleChance: 0.8
-  collectibleChance: 0.4
-  powerupChance: 0.08
-  obstacleCellsPerChunkMin: 1
-  obstacleCellsPerChunkMax: 3
-  collectibleCellsPerChunkMin: 1
-  collectibleCellsPerChunkMax: 4
+  chunkLength: 200
+  chunksAhead: 3
+  cleanupBehind: 2
 --- !u!1 &42593800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1091,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 15.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &330585543
@@ -1293,6 +1264,57 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1 &383656031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 383656032}
+  - component: {fileID: 383656033}
+  m_Layer: 0
+  m_Name: SpeedControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &383656032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383656031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 780827870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383656033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383656031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fffd34bbbff3b44a8d9c10d863d4ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunSpeedRamp
+  speed: {fileID: 11400000, guid: 6fc36dd41312aef4893627d50eb7018a, type: 2}
+  progress: {fileID: 1541770150}
+  startSpeed: 20
+  maxSpeed: 45
+  distancePerStep: 100
+  speedIncreasePerStep: 0.5
+  isRunning: 1
 --- !u!1 &392761807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,7 +1604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &402823947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2649,6 +2671,7 @@ Transform:
   - {fileID: 557140051}
   - {fileID: 163807142}
   - {fileID: 1046430918}
+  - {fileID: 383656032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789210836
@@ -3057,6 +3080,7 @@ MonoBehaviour:
   progressTracker: {fileID: 1541770150}
   chunkGenerator: {fileID: 36057079}
   playerLaneMover: {fileID: 1896904250}
+  speedRamp: {fileID: 0}
 --- !u!1 &1071910219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3424,7 +3448,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 15.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1089491055
@@ -3953,6 +3977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166217409}
+  - component: {fileID: 1166217410}
   m_Layer: 0
   m_Name: GroundChunks
   m_TagString: Untagged
@@ -3975,6 +4000,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 44787245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166217410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166217408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f68ac076f63c3a4884c3e2b4202b170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundChunkSpawner
+  groundParent: {fileID: 1166217409}
+  groundPrefabs:
+  - {fileID: 3535874599674866434, guid: 1d92d3e23393e854085638d8a29607f5, type: 3}
+  chunkLength: 200
+  gameplayXOffset: 0
+  groundYOffset: -3
 --- !u!1 &1177252636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4173,7 +4216,7 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404714405}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: ClearGate
         m_Mode: 1
@@ -4387,7 +4430,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1404714405}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: ClearGate
         m_Mode: 1
@@ -5152,7 +5195,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1404714404}
-  - component: {fileID: 1404714405}
   m_Layer: 0
   m_Name: SpecialObjects
   m_TagString: Untagged
@@ -5175,25 +5217,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 44787245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1404714405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404714403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382daca9743373446b18cdf8025c3a92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeliveryGateSpawner
-  gatePrefab: {fileID: 2933604497545171519, guid: 3385539b6b044814ebb8a61ab74ad9b3, type: 3}
-  spawnedParent: {fileID: 1404714404}
-  progress: {fileID: 1541770150}
-  finishDistance: 300
-  spawnLeadDistance: 120
-  laneX: 0
-  yOffset: 0
 --- !u!1 &1412819869
 GameObject:
   m_ObjectHideFlags: 0
@@ -6671,7 +6694,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 15.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1742760589
@@ -7353,7 +7376,7 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404714405}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: SpawnGate
         m_Mode: 1
@@ -8159,6 +8182,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2089354921}
+  - component: {fileID: 2089354923}
+  - component: {fileID: 2089354922}
   m_Layer: 0
   m_Name: SpawnedObjects
   m_TagString: Untagged
@@ -8181,6 +8206,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 44787245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2089354922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089354920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fee930f99a725d488ac7851c36926cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstaclePatternPlanner
+  weightEmpty: 1
+  weightFullWallOneGap: 2
+  weightOpenColumn: 3
+  weightOpenRow: 3
+  weightDiagonalSafe: 2
+  weightCornerPocket: 2
+  weightZigZagGapPair: 3
+--- !u!114 &2089354923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089354920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09360dfaca4369643936b07d8b55ee99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayChunkSpawner
+  spawnedParent: {fileID: 2089354921}
+  patternPlanner: {fileID: 2089354922}
+  useFirstChunkObstacleDelay: 1
+  firstChunkObstacleStartZ: 40
+  useFirstChunkCollectibleDelay: 1
+  firstChunkCollectibleStartZ: 20
+  oneCollectiblePerBand: 1
+  laneX:
+  - -2
+  - 0
+  - 2
+  rowY:
+  - -1.5
+  - 0
+  - 1.5
+  gameplayXOffset: 0
+  gameplayYOffset: 0
+  chunkLength: 200
+  zBandsPerChunk: 5
+  bandEdgePadding: 0.1
+  obstaclePrefabs:
+  - {fileID: 6252840374785252207, guid: 0eefd915e9340c449a9099b359980bc4, type: 3}
+  collectiblePrefabs:
+  - {fileID: 8092272368976777395, guid: 5f878f1425221524d91f88b0cef05b6f, type: 3}
+  - {fileID: 2029477118467662059, guid: d533a8150f927ac40b4554492843a7ef, type: 3}
+  powerupPrefabs:
+  - {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
+  - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
+  obstacleBandsPerChunkMin: 10
+  obstacleBandsPerChunkMax: 15
+  collectibleGroupsPerChunkMin: 3
+  collectibleGroupsPerChunkMax: 6
+  collectibleChainLengthMin: 1
+  collectibleChainLengthMax: 1
+  collectibleSafeCellBias: 0.95
+  powerupChunkChance: 0.12
+  onePowerupPerChunk: 1
+  onePowerupPerBand: 1
+  powerupsSafeCellsOnly: 1
+  powerupBandsPerChunkMin: 0
+  powerupBandsPerChunkMax: 1
 --- !u!1 &2130338571
 GameObject:
   m_ObjectHideFlags: 0
