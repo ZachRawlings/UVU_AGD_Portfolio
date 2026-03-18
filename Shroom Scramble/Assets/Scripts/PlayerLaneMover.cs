@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerLaneMover : MonoBehaviour
 {
     [Header("Refs")]
-    public Transform visual;   // drag PlayerVisual here
-    public FloatData speed;
+    public Transform visual;
 
     [Header("Lanes")]
     public float[] laneXPositions = { -2f, 0f, 2f };
@@ -20,18 +19,22 @@ public class PlayerLaneMover : MonoBehaviour
     public float horizontalSmoothTime = 0.07f;
     public float visualYSmoothTime = 0.06f;
 
-    private float baseY;                 // ROOT Y (locked)
-    private float zPos;
+    private float baseY;
+    private float fixedZ;
 
     private float xVel;
 
-    private float visualBaseLocalY;      // VISUAL baseline local Y
-    private float visualTargetOffsetY;   // current dodge offset
+    private float visualBaseLocalY;
+    private float visualTargetOffsetY;
     private float visualYVel;
     private Coroutine dodgeRoutine;
 
     private Rigidbody rb;
+    
+    public bool isRunning = true;
 
+    public void PauseRun() => isRunning = false;
+    public void ResumeRun() => isRunning = true;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,7 +42,7 @@ public class PlayerLaneMover : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation.Interpolate;
 
         baseY = transform.position.y;
-        zPos = transform.position.z;
+        fixedZ = transform.position.z;
 
         if (visual == null && transform.childCount > 0)
             visual = transform.GetChild(0);
@@ -52,18 +55,14 @@ public class PlayerLaneMover : MonoBehaviour
 
     void FixedUpdate()
     {
-        float spd = (speed != null) ? speed.Value : 10f;
-        zPos += spd * Time.fixedDeltaTime;
-
+        if (!isRunning) return;
         float targetX = laneXPositions[Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1)];
 
         Vector3 p = rb.position;
         float newX = Mathf.SmoothDamp(p.x, targetX, ref xVel, horizontalSmoothTime);
 
-        // ✅ ROOT Y is hard-locked. No drift possible.
-        rb.MovePosition(new Vector3(newX, baseY, zPos));
+        rb.MovePosition(new Vector3(newX, baseY, fixedZ));
 
-        // ✅ Dodge only affects the VISUAL child
         if (visual != null)
         {
             float targetLocalY = visualBaseLocalY + visualTargetOffsetY;
@@ -94,10 +93,9 @@ public class PlayerLaneMover : MonoBehaviour
         dodgeRoutine = null;
     }
 
-    
     private void SnapToLaneNow()
     {
         laneIndex = Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1);
-        rb.position = new Vector3(laneXPositions[laneIndex], baseY, zPos);
+        rb.position = new Vector3(laneXPositions[laneIndex], baseY, fixedZ);
     }
 }

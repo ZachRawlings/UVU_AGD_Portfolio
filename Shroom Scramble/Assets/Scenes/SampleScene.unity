@@ -231,6 +231,86 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &36057077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36057078}
+  - component: {fileID: 36057079}
+  m_Layer: 0
+  m_Name: ChunkGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &36057078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36057077}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 733520012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &36057079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36057077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbca8628199a36244afff5a3b5e5c150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChunkGenerator
+  progress: {fileID: 1541770150}
+  movingWorld: {fileID: 44787245}
+  groundParent: {fileID: 1166217409}
+  spawnedParent: {fileID: 2089354921}
+  isRunning: 1
+  chunkLength: 20
+  chunksAhead: 8
+  cleanupBehind: 3
+  gameplayXOffset: 0
+  gameplayYOffset: 0
+  groundYOffset: -3
+  laneX:
+  - -2
+  - 0
+  - 2
+  rowY:
+  - -1.5
+  - 0
+  - 1.5
+  groundPrefabs:
+  - {fileID: 3535874599674866434, guid: 1d92d3e23393e854085638d8a29607f5, type: 3}
+  obstaclePrefabs:
+  - {fileID: 6252840374785252207, guid: 0eefd915e9340c449a9099b359980bc4, type: 3}
+  collectiblePrefabs:
+  - {fileID: 2029477118467662059, guid: d533a8150f927ac40b4554492843a7ef, type: 3}
+  - {fileID: 8092272368976777395, guid: 5f878f1425221524d91f88b0cef05b6f, type: 3}
+  powerupPrefabs:
+  - {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
+  - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
+  obstacleChance: 0.8
+  collectibleChance: 0.4
+  powerupChance: 0.08
+  obstacleCellsPerChunkMin: 1
+  obstacleCellsPerChunkMax: 3
+  collectibleCellsPerChunkMin: 1
+  collectibleCellsPerChunkMax: 4
 --- !u!1 &42593800
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +352,55 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: 57}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &44787243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44787245}
+  - component: {fileID: 44787244}
+  m_Layer: 0
+  m_Name: MovingWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &44787244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44787243}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfedc8e0d94ad94e8bbd3a487427673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldScroller
+  speed: {fileID: 11400000, guid: 6fc36dd41312aef4893627d50eb7018a, type: 2}
+  isRunning: 1
+--- !u!4 &44787245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44787243}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1166217409}
+  - {fileID: 2089354921}
+  - {fileID: 1404714404}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &52313483
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +638,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1046430919}
+        m_TargetAssemblyTypeName: RunPauseController, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2147,623 +2288,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582024849}
   m_CullTransparentMesh: 1
---- !u!1 &597017059
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 597017069}
-  - component: {fileID: 597017068}
-  - component: {fileID: 597017067}
-  - component: {fileID: 597017066}
-  - component: {fileID: 597017065}
-  - component: {fileID: 597017064}
-  - component: {fileID: 597017063}
-  - component: {fileID: 597017062}
-  - component: {fileID: 597017061}
-  - component: {fileID: 597017060}
-  - component: {fileID: 597017070}
-  - component: {fileID: 597017071}
-  m_Layer: 0
-  m_Name: CollectibleSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &597017060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: b0ff57f805122184db19e06e82e741b9, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017068}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: e7540f3ba7cc8804dacb8d2367511f2f, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017068}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 3eee414b28c6b054e844aaced0dd1f9e, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017068}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 63705d60cda0c4d49b5186099ec67ca0, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: df5de9a90746618449266cbca877c200, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: PauseTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 64ff71f6e7f16b54d860feef5c68d57f, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017068}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StartDelayForRun
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7539b9ca8eb63f6489ec25f89aa4b41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DelayedCall
-  duration: 5
-  onFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: OnDelayFinished_StartSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &597017067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f5330042e9143d0b2362ced9e56d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoroutineBehaviour
-  repeatUntilFalseEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017068}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: TrySpawnAhead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &597017068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d57e24422b2c34384ced2003bd1e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AheadSpawner
-  preventCrossSpawnerOverlaps: 1
-  reservationKeepStepsBehind: 8
-  weightedModes:
-  - mode: 0
-    weight: 40
-  - mode: 1
-    weight: 28
-  - mode: 6
-    weight: 14
-  - mode: 7
-    weight: 10
-  - mode: 5
-    weight: 6
-  - mode: 3
-    weight: 3
-  - mode: 2
-    weight: 2
-  - mode: 4
-    weight: 0
-  player: {fileID: 1896904253}
-  prefabs:
-  - {fileID: 8092272368976777395, guid: 5f878f1425221524d91f88b0cef05b6f, type: 3}
-  - {fileID: 2029477118467662059, guid: d533a8150f927ac40b4554492843a7ef, type: 3}
-  startAhead: 180
-  keepAheadDistance: 90
-  spawnSpacing: 50
-  reservationZCellSize: 5
-  rowIndices: feffffff0000000002000000
-  rowOffsetY: 1
-  laneXPositions:
-  - -2
-  - 0
-  - 2
-  captureGridYFromPlayerOnEnable: 0
-  captureGridYFromPlayerOnReset: 0
-  gridOriginY: 0
-  mode: 0
-  enablePatternCycling: 0
-  modeSwitchChance: 0
-  minModeSteps: 2
-  maxModeSteps: 5
-  clusterMin: 2
-  clusterMax: 3
-  guaranteeSafeCell: 0
-  destroyBehindDistance: 7
---- !u!4 &597017069
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08196, y: -0.07947, z: 0.48679}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 733520012}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &597017070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 38f245e430ef20f4a9abb3f3198a6a6d, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 597017067}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017066}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017068}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 597017071}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &597017071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597017059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bfe98c27afd37649975f54cd6815278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnerDelayController
-  delayTimer: {fileID: 597017066}
-  coroutineBehaviour: {fileID: 597017067}
 --- !u!1 &706581250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,7 +2382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &733520012
 Transform:
   m_ObjectHideFlags: 0
@@ -2868,13 +2392,12 @@ Transform:
   m_GameObject: {fileID: 733520011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08196, y: 0.07947, z: -0.48679}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2131686477}
-  - {fileID: 597017069}
-  - {fileID: 1885296790}
+  - {fileID: 1541770149}
+  - {fileID: 36057078}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742973662
@@ -3125,6 +2648,7 @@ Transform:
   - {fileID: 2027392094}
   - {fileID: 557140051}
   - {fileID: 163807142}
+  - {fileID: 1046430918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789210836
@@ -3396,7 +2920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &927835335
 Transform:
   m_ObjectHideFlags: 0
@@ -3405,7 +2929,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927835334}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3485,6 +3009,54 @@ MonoBehaviour:
   - {fileID: 1687299276}
   tileLength: 50
   recycleOffset: 15
+--- !u!1 &1046430917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1046430918}
+  - component: {fileID: 1046430919}
+  m_Layer: 0
+  m_Name: RunPauseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1046430918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046430917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 780827870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1046430919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046430917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdb1ff3f3fb50d498c0178d88d3765e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunPauseController
+  worldScroller: {fileID: 44787244}
+  progressTracker: {fileID: 1541770150}
+  chunkGenerator: {fileID: 36057079}
+  playerLaneMover: {fileID: 1896904250}
 --- !u!1 &1071910219
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,6 +3944,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164198446}
   m_CullTransparentMesh: 1
+--- !u!1 &1166217408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1166217409}
+  m_Layer: 0
+  m_Name: GroundChunks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1166217409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166217408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 44787245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177252636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4424,7 +4027,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2027392093}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: ClearGate
         m_Mode: 1
@@ -4460,18 +4063,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1896904254}
-        m_TargetAssemblyTypeName: TransformRest, Assembly-CSharp
-        m_MethodName: ResetNow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2027392102}
         m_TargetAssemblyTypeName: SpawnReservationBridge, Assembly-CSharp
         m_MethodName: ResetAll
@@ -4487,6 +4078,54 @@ MonoBehaviour:
       - m_Target: {fileID: 1674050993}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: StopRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: StopRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4534,7 +4173,7 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2027392093}
+      - m_Target: {fileID: 1404714405}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: ClearGate
         m_Mode: 1
@@ -4582,18 +4221,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1896904254}
-        m_TargetAssemblyTypeName: TransformRest, Assembly-CSharp
-        m_MethodName: ResetNow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2027392102}
         m_TargetAssemblyTypeName: SpawnReservationBridge, Assembly-CSharp
         m_MethodName: ResetAll
@@ -4609,6 +4236,54 @@ MonoBehaviour:
       - m_Target: {fileID: 1674050993}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: StopRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: StopRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4712,7 +4387,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2027392093}
+      - m_Target: {fileID: 1404714405}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: ClearGate
         m_Mode: 1
@@ -4832,6 +4507,66 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 36057079}
+        m_TargetAssemblyTypeName: ChunkGenerator, Assembly-CSharp
+        m_MethodName: ResetGeneration
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: StartRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: StartRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 64ff71f6e7f16b54d860feef5c68d57f, type: 2}
         m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
         m_MethodName: Raise
@@ -4870,18 +4605,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2027392099}
         m_TargetAssemblyTypeName: DestroyByTag, Assembly-CSharp
         m_MethodName: DestroyAll
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 17db798ef9befa040bcd282573f43096, type: 2}
-        m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
-        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5420,6 +5143,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1404714403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1404714404}
+  - component: {fileID: 1404714405}
+  m_Layer: 0
+  m_Name: SpecialObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1404714404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404714403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 44787245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1404714405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404714403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382daca9743373446b18cdf8025c3a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeliveryGateSpawner
+  gatePrefab: {fileID: 2933604497545171519, guid: 3385539b6b044814ebb8a61ab74ad9b3, type: 3}
+  spawnedParent: {fileID: 1404714404}
+  progress: {fileID: 0}
+  finishDistance: 300
+  spawnLeadDistance: 120
+  laneX: 0
+  yOffset: 0
 --- !u!1 &1412819869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5935,6 +5709,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528549708}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1541770148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541770149}
+  - component: {fileID: 1541770150}
+  m_Layer: 0
+  m_Name: RunProgressTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1541770149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541770148}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 733520012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541770150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541770148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced63c18c92d8014c8f9d1da3d4db897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunProgressTracker
+  speed: {fileID: 11400000, guid: 6fc36dd41312aef4893627d50eb7018a, type: 2}
+  isRunning: 1
 --- !u!1 &1545360935
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,623 +6935,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1885296784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1885296790}
-  - component: {fileID: 1885296789}
-  - component: {fileID: 1885296788}
-  - component: {fileID: 1885296797}
-  - component: {fileID: 1885296796}
-  - component: {fileID: 1885296795}
-  - component: {fileID: 1885296794}
-  - component: {fileID: 1885296793}
-  - component: {fileID: 1885296792}
-  - component: {fileID: 1885296791}
-  - component: {fileID: 1885296798}
-  - component: {fileID: 1885296799}
-  m_Layer: 0
-  m_Name: PowerUpSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1885296788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f5330042e9143d0b2362ced9e56d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoroutineBehaviour
-  repeatUntilFalseEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296789}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: TrySpawnAhead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1885296789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d57e24422b2c34384ced2003bd1e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AheadSpawner
-  preventCrossSpawnerOverlaps: 1
-  reservationKeepStepsBehind: 8
-  weightedModes:
-  - mode: 0
-    weight: 40
-  - mode: 1
-    weight: 28
-  - mode: 6
-    weight: 14
-  - mode: 7
-    weight: 10
-  - mode: 5
-    weight: 6
-  - mode: 3
-    weight: 3
-  - mode: 2
-    weight: 2
-  - mode: 4
-    weight: 0
-  player: {fileID: 1896904253}
-  prefabs:
-  - {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
-  - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
-  startAhead: 180
-  keepAheadDistance: 90
-  spawnSpacing: 300
-  reservationZCellSize: 5
-  rowIndices: feffffff0000000002000000
-  rowOffsetY: 1
-  laneXPositions:
-  - -2
-  - 0
-  - 2
-  captureGridYFromPlayerOnEnable: 0
-  captureGridYFromPlayerOnReset: 0
-  gridOriginY: 0
-  mode: 0
-  enablePatternCycling: 0
-  modeSwitchChance: 0
-  minModeSteps: 2
-  maxModeSteps: 5
-  clusterMin: 2
-  clusterMax: 3
-  guaranteeSafeCell: 0
-  destroyBehindDistance: 7
---- !u!4 &1885296790
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08196, y: -0.07947, z: 0.48679}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 733520012}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1885296791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: b0ff57f805122184db19e06e82e741b9, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296789}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: e7540f3ba7cc8804dacb8d2367511f2f, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296789}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 3eee414b28c6b054e844aaced0dd1f9e, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296789}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 63705d60cda0c4d49b5186099ec67ca0, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: df5de9a90746618449266cbca877c200, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: PauseTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 64ff71f6e7f16b54d860feef5c68d57f, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296789}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StartDelayForRun
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7539b9ca8eb63f6489ec25f89aa4b41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DelayedCall
-  duration: 20
-  onFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: OnDelayFinished_StartSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1885296798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 38f245e430ef20f4a9abb3f3198a6a6d, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1885296788}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296797}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296799}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StopAndReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1885296789}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &1885296799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885296784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bfe98c27afd37649975f54cd6815278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnerDelayController
-  delayTimer: {fileID: 1885296797}
-  coroutineBehaviour: {fileID: 1885296788}
 --- !u!1 &1893770810
 GameObject:
   m_ObjectHideFlags: 0
@@ -7822,7 +7025,6 @@ GameObject:
   - component: {fileID: 1896904248}
   - component: {fileID: 1896904247}
   - component: {fileID: 1896904246}
-  - component: {fileID: 1896904254}
   - component: {fileID: 1896904256}
   - component: {fileID: 1896904255}
   m_Layer: 0
@@ -7985,7 +7187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLaneMover
   visual: {fileID: 6190017}
-  speed: {fileID: 11400000, guid: 99b113b12203540d492d2d94ec50daf4, type: 2}
   laneXPositions:
   - -2
   - 0
@@ -7995,6 +7196,7 @@ MonoBehaviour:
   dodgeDuration: 0.45
   horizontalSmoothTime: 0.07
   visualYSmoothTime: 0.06
+  isRunning: 1
 --- !u!54 &1896904251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8038,20 +7240,6 @@ Transform:
   - {fileID: 6190017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1896904254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896904245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edc9d17bad56c99449cb78d2d90fdc21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TransformRest
-  target: {fileID: 1896904253}
-  startPoint: {fileID: 1357764727}
 --- !u!114 &1896904255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8131,7 +7319,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2027392094}
-  - component: {fileID: 2027392093}
   - component: {fileID: 2027392092}
   - component: {fileID: 2027392096}
   - component: {fileID: 2027392098}
@@ -8166,7 +7353,7 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2027392093}
+      - m_Target: {fileID: 1404714405}
         m_TargetAssemblyTypeName: DeliveryGateSpawner, Assembly-CSharp
         m_MethodName: SpawnGate
         m_Mode: 1
@@ -8182,23 +7369,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   holdTime: 0.1
---- !u!114 &2027392093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027392091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382daca9743373446b18cdf8025c3a92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeliveryGateSpawner
-  player: {fileID: 1896904253}
-  gatePrefab: {fileID: 2933604497545171519, guid: 3385539b6b044814ebb8a61ab74ad9b3, type: 3}
-  spawnAhead: 60
-  laneX: 0
-  yOffset: 0
 --- !u!4 &2027392094
 Transform:
   m_ObjectHideFlags: 0
@@ -8542,6 +7712,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1046430919}
+        m_TargetAssemblyTypeName: RunPauseController, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -8601,6 +7783,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1046430919}
+        m_TargetAssemblyTypeName: RunPauseController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -8636,7 +7830,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1896904254}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TransformRest, Assembly-CSharp
         m_MethodName: ResetNow
         m_Mode: 1
@@ -8956,6 +8150,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079218729}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2089354920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2089354921}
+  m_Layer: 0
+  m_Name: SpawnedObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2089354921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089354920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 44787245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2130338571
 GameObject:
   m_ObjectHideFlags: 0
@@ -9068,574 +8293,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130338571}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2131686467
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2131686477}
-  - component: {fileID: 2131686476}
-  - component: {fileID: 2131686475}
-  - component: {fileID: 2131686474}
-  - component: {fileID: 2131686473}
-  - component: {fileID: 2131686472}
-  - component: {fileID: 2131686471}
-  - component: {fileID: 2131686470}
-  - component: {fileID: 2131686469}
-  - component: {fileID: 2131686478}
-  - component: {fileID: 2131686468}
-  - component: {fileID: 2131686479}
-  m_Layer: 0
-  m_Name: ObstacleSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2131686468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: b0ff57f805122184db19e06e82e741b9, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686476}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: e7540f3ba7cc8804dacb8d2367511f2f, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686476}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 3eee414b28c6b054e844aaced0dd1f9e, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686476}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 63705d60cda0c4d49b5186099ec67ca0, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686479}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: df5de9a90746618449266cbca877c200, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: PauseTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686479}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 64ff71f6e7f16b54d860feef5c68d57f, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686476}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686479}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: StartDelayForRun
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7539b9ca8eb63f6489ec25f89aa4b41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DelayedCall
-  duration: 0
-  onFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686479}
-        m_TargetAssemblyTypeName: SpawnerDelayController, Assembly-CSharp
-        m_MethodName: OnDelayFinished_StartSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2131686475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f5330042e9143d0b2362ced9e56d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoroutineBehaviour
-  repeatUntilFalseEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686476}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: TrySpawnAhead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2131686476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d57e24422b2c34384ced2003bd1e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AheadSpawner
-  preventCrossSpawnerOverlaps: 1
-  reservationKeepStepsBehind: 8
-  weightedModes:
-  - mode: 0
-    weight: 5
-  - mode: 1
-    weight: 8
-  - mode: 6
-    weight: 8
-  - mode: 7
-    weight: 12
-  - mode: 5
-    weight: 10
-  - mode: 3
-    weight: 20
-  - mode: 2
-    weight: 20
-  - mode: 4
-    weight: 5
-  player: {fileID: 1896904253}
-  prefabs:
-  - {fileID: 6252840374785252207, guid: 0eefd915e9340c449a9099b359980bc4, type: 3}
-  startAhead: 60
-  keepAheadDistance: 90
-  spawnSpacing: 25
-  reservationZCellSize: 5
-  rowIndices: feffffff0000000002000000
-  rowOffsetY: 1
-  laneXPositions:
-  - -2
-  - 0
-  - 2
-  captureGridYFromPlayerOnEnable: 1
-  captureGridYFromPlayerOnReset: 0
-  gridOriginY: 0
-  mode: 1
-  enablePatternCycling: 1
-  modeSwitchChance: 1
-  minModeSteps: 1
-  maxModeSteps: 5
-  clusterMin: 2
-  clusterMax: 7
-  guaranteeSafeCell: 1
-  destroyBehindDistance: 7
---- !u!4 &2131686477
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08196, y: -0.07947, z: 0.48679}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 733520012}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2131686478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
-  action: {fileID: 11400000, guid: 38f245e430ef20f4a9abb3f3198a6a6d, type: 2}
-  startEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  respondEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131686475}
-        m_TargetAssemblyTypeName: CoroutineBehaviour, Assembly-CSharp
-        m_MethodName: StopRepeatedUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686474}
-        m_TargetAssemblyTypeName: DelayedCall, Assembly-CSharp
-        m_MethodName: ResetTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2131686476}
-        m_TargetAssemblyTypeName: AheadSpawner, Assembly-CSharp
-        m_MethodName: ResetSpawner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  respondLateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  holdTime: 0.1
---- !u!114 &2131686479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131686467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bfe98c27afd37649975f54cd6815278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnerDelayController
-  delayTimer: {fileID: 2131686474}
-  coroutineBehaviour: {fileID: 2131686475}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -9650,4 +8307,5 @@ SceneRoots:
   - {fileID: 1896904253}
   - {fileID: 780827870}
   - {fileID: 733520012}
+  - {fileID: 44787245}
   - {fileID: 927835335}

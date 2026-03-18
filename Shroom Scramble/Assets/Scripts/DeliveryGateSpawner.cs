@@ -3,37 +3,52 @@ using UnityEngine;
 public class DeliveryGateSpawner : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
     public GameObject gatePrefab;
+    public Transform spawnedParent;          // MovingWorld/SpawnedObjects or SpecialObjects
+    public RunProgressTracker progress;      // assign your RunProgressTracker
 
-    [Header("Spawn Placement")]
-    public float spawnAhead = 60f;     // how far ahead of the player to place the gate
-    public float laneX = 0f;           // put it centered
-    public float yOffset = 0f;         // relative to player Y
+    [Header("Finish Distance")]
+    public float finishDistance = 300f;      // where the finish line should exist in run-space
+    public float spawnLeadDistance = 120f;   // spawn it this far before the player reaches it
+
+    [Header("Placement")]
+    public float laneX = 0f;
+    public float yOffset = 0f;
 
     private GameObject activeGate;
+    private bool hasSpawned;
+
+    private void FixedUpdate()
+    {
+        if (hasSpawned) return;
+        if (gatePrefab == null || spawnedParent == null || progress == null) return;
+
+        float remaining = finishDistance - progress.Distance;
+
+        if (remaining <= spawnLeadDistance)
+        {
+            SpawnGate();
+        }
+    }
 
     public void SpawnGate()
     {
-        if (!player || !gatePrefab) return;
+        if (hasSpawned) return;
+        if (gatePrefab == null || spawnedParent == null) return;
 
-        // If gate object got destroyed externally, clear the reference
-        if (activeGate == null) activeGate = null;
+        activeGate = Instantiate(gatePrefab, spawnedParent);
+        activeGate.transform.localPosition = new Vector3(laneX, yOffset, finishDistance);
+        activeGate.transform.localRotation = Quaternion.identity;
 
-        if (activeGate != null) return;
-
-        Vector3 pos = new Vector3(laneX, player.position.y + yOffset, player.position.z + spawnAhead);
-        activeGate = Instantiate(gatePrefab, pos, Quaternion.identity);
-
-        var d = activeGate.GetComponent<DestroyWhenBehindPlayer>();
-        if (d == null) d = activeGate.AddComponent<DestroyWhenBehindPlayer>();
-        d.player = player;
+        hasSpawned = true;
     }
 
-    // Optional (for later soft reset)
     public void ClearGate()
     {
-        if (activeGate != null) Destroy(activeGate);
+        if (activeGate != null)
+            Destroy(activeGate);
+
         activeGate = null;
+        hasSpawned = false;
     }
 }
