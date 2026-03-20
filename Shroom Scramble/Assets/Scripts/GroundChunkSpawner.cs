@@ -15,7 +15,7 @@ public class GroundChunkSpawner : MonoBehaviour
 
         GameObject prefab = groundPrefabs[Random.Range(0, groundPrefabs.Length)];
 
-        float zStart = chunkIndex * chunkLength;
+        float zStart = chunkIndex * chunkLength - 10f;
         float centerZ = zStart + (chunkLength * 0.5f);
 
         GameObject go = Instantiate(prefab, groundParent);

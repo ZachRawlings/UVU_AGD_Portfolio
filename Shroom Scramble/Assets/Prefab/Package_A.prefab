@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1196238354287101767}
   - component: {fileID: 3860472348594555505}
   - component: {fileID: 7266429402092890600}
+  - component: {fileID: -7845526718611367492}
   m_Layer: 0
   m_Name: Package_A
   m_TagString: Spawns
@@ -127,3 +128,50 @@ MonoBehaviour:
   playerTag: Player
   onTriggered: {fileID: 11400000, guid: a0d434714eb6b224b99c1455bd91fc2a, type: 2}
   destroyAfterTrigger: 1
+--- !u!114 &-7845526718611367492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8092272368976777395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
+  action: {fileID: 11400000, guid: a0d434714eb6b224b99c1455bd91fc2a, type: 2}
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  respondEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: fc955ee4746b4f04cb8dd8d117575482, type: 2}
+        m_TargetAssemblyTypeName: IntData, Assembly-CSharp
+        m_MethodName: UpdateValue
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 25
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 43fd7f1b69d5fee4689bc0627b293037, type: 2}
+        m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 25
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  respondLateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  holdTime: 0.1
