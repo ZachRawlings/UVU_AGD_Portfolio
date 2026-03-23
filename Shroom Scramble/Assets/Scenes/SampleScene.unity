@@ -1681,6 +1681,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582024849}
   m_CullTransparentMesh: 1
+--- !u!1 &675560678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675560679}
+  - component: {fileID: 675560680}
+  m_Layer: 0
+  m_Name: DistanceTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675560679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675560678}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 780827870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675560680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675560678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54df21e09f9f05847a8cf9688e415908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDistanceToFloatData
+  distanceData: {fileID: 11400000, guid: 1b178ed6c2a31ea49b70aadf6bc1fedc, type: 2}
+  worldSpeed: 5
+  useUnscaledTime: 0
+  roundDownForDisplay: 0
+  distanceTravelled: 0
 --- !u!1 &706581250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,6 +2016,7 @@ Transform:
   - {fileID: 163807142}
   - {fileID: 1046430918}
   - {fileID: 383656032}
+  - {fileID: 675560679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827234862
@@ -5042,7 +5092,7 @@ GameObject:
   - component: {fileID: 1903203619}
   - component: {fileID: 1903203622}
   - component: {fileID: 1903203621}
-  - component: {fileID: 1903203620}
+  - component: {fileID: 1903203623}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -5069,61 +5119,6 @@ RectTransform:
   m_AnchoredPosition: {x: 194, y: -71}
   m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1903203620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903203618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f8f7ab48a174d409848f7c98c2133d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TextMeshProBehaviour
-  gameActionObj: {fileID: 11400000, guid: 43fd7f1b69d5fee4689bc0627b293037, type: 2}
-  awakeEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1903203620}
-        m_TargetAssemblyTypeName: TextMeshProBehaviour, Assembly-CSharp
-        m_MethodName: UpdateText
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 000000
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: fc955ee4746b4f04cb8dd8d117575482, type: 2}
-        m_TargetAssemblyTypeName: IntData, Assembly-CSharp
-        m_MethodName: SetValue
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 000000
-          m_BoolArgument: 0
-        m_CallState: 2
-  raiseEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1903203620}
-        m_TargetAssemblyTypeName: TextMeshProBehaviour, Assembly-CSharp
-        m_MethodName: UpdateText
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: fc955ee4746b4f04cb8dd8d117575482, type: 2}
-          m_ObjectArgumentAssemblyTypeName: IntData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1903203621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5223,6 +5218,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903203618}
   m_CullTransparentMesh: 1
+--- !u!114 &1903203623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903203618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7244f2f614761014fa2e97ca52cde6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunProgressToTMPText
+  progress: {fileID: 1541770150}
+  textUI: {fileID: 1903203621}
+  prefix: 
+  suffix: 
 --- !u!1 &1999158071
 GameObject:
   m_ObjectHideFlags: 0
@@ -5234,7 +5245,7 @@ GameObject:
   - component: {fileID: 1999158072}
   - component: {fileID: 1999158075}
   - component: {fileID: 1999158074}
-  - component: {fileID: 1999158073}
+  - component: {fileID: 1999158076}
   m_Layer: 5
   m_Name: ScoreValue
   m_TagString: Untagged
@@ -5261,49 +5272,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 88}
   m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1999158073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999158071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f8f7ab48a174d409848f7c98c2133d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TextMeshProBehaviour
-  gameActionObj: {fileID: 11400000, guid: 43fd7f1b69d5fee4689bc0627b293037, type: 2}
-  awakeEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1999158073}
-        m_TargetAssemblyTypeName: TextMeshProBehaviour, Assembly-CSharp
-        m_MethodName: UpdateText
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 000000
-          m_BoolArgument: 0
-        m_CallState: 2
-  raiseEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1999158073}
-        m_TargetAssemblyTypeName: TextMeshProBehaviour, Assembly-CSharp
-        m_MethodName: UpdateText
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: fc955ee4746b4f04cb8dd8d117575482, type: 2}
-          m_ObjectArgumentAssemblyTypeName: IntData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1999158074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5403,6 +5371,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999158071}
   m_CullTransparentMesh: 1
+--- !u!114 &1999158076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999158071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7244f2f614761014fa2e97ca52cde6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunProgressToTMPText
+  progress: {fileID: 1541770150}
+  textUI: {fileID: 1999158074}
+  prefix: 
+  suffix: 
 --- !u!1 &2009003997
 GameObject:
   m_ObjectHideFlags: 0
