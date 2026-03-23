@@ -26,6 +26,6 @@ public class FloatDataToTMPText : MonoBehaviour
     public void RefreshFromData()
     {
         if (data == null || textUI == null) return;
-        textUI.text = prefix + Mathf.FloorToInt(data.Value) + suffix;
+        textUI.text = prefix + Mathf.FloorToInt(data.Value/5f) + suffix;
     }
 }

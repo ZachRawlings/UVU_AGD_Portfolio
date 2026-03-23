@@ -1054,13 +1054,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00512027710ee4cd387edf611ea8d8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImageBehaviour
-  updateAction: {fileID: 0}
+  updateAction: {fileID: 11400000, guid: 22c49c06db2ea554086d68e5bdd52d86, type: 2}
   startEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 265192177}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+        m_MethodName: set_fillAmount
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   updateImageEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 265192176}
+        m_TargetAssemblyTypeName: ImageBehaviour, Assembly-CSharp
+        m_MethodName: UpdateWithFloatData
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 536e5620fbd2eee4a840ce0cce812232, type: 2}
+          m_ObjectArgumentAssemblyTypeName: FloatData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &265192177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2444,7 +2468,7 @@ GameObject:
   - component: {fileID: 918498548}
   - component: {fileID: 918498551}
   - component: {fileID: 918498550}
-  - component: {fileID: 918498549}
+  - component: {fileID: 918498552}
   m_Layer: 5
   m_Name: FinalScore
   m_TagString: Untagged
@@ -2471,37 +2495,6 @@ RectTransform:
   m_AnchoredPosition: {x: -253, y: 409}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &918498549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918498547}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f8f7ab48a174d409848f7c98c2133d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TextMeshProBehaviour
-  gameActionObj: {fileID: 11400000, guid: 3eee414b28c6b054e844aaced0dd1f9e, type: 2}
-  awakeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  raiseEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 918498549}
-        m_TargetAssemblyTypeName: TextMeshProBehaviour, Assembly-CSharp
-        m_MethodName: UpdateText
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: You Failed...
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &918498550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2601,6 +2594,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918498547}
   m_CullTransparentMesh: 1
+--- !u!114 &918498552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918498547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7244f2f614761014fa2e97ca52cde6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunProgressToTMPText
+  progress: {fileID: 1541770150}
+  textUI: {fileID: 918498550}
+  prefix: 
+  suffix: ' m'
 --- !u!1 &1032675619
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,18 +3175,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1541770150}
-        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
-        m_MethodName: ResetProgress
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 675560680}
         m_TargetAssemblyTypeName: HighScoreTracker, Assembly-CSharp
         m_MethodName: CheckForNewHighScore
@@ -3187,6 +3184,30 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44787244}
+        m_TargetAssemblyTypeName: WorldScroller, Assembly-CSharp
+        m_MethodName: ResetScrollPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 536e5620fbd2eee4a840ce0cce812232, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3228,6 +3249,18 @@ MonoBehaviour:
   respondEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: ResetProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1713005941}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3252,15 +3285,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: e59a1d4455babc44ea1b0cef9156dfc6, type: 2}
-        m_TargetAssemblyTypeName: IntData, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 536e5620fbd2eee4a840ce0cce812232, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
         m_MethodName: SetValue
-        m_Mode: 2
+        m_Mode: 4
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: a40b8d28d777d214587dabfb3570f717, type: 2}
-          m_ObjectArgumentAssemblyTypeName: IntData, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3348,9 +3381,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1541770150}
-        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
-        m_MethodName: ResetProgress
+      - m_Target: {fileID: 675560680}
+        m_TargetAssemblyTypeName: HighScoreTracker, Assembly-CSharp
+        m_MethodName: LoadHighScore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3360,9 +3393,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 675560680}
-        m_TargetAssemblyTypeName: HighScoreTracker, Assembly-CSharp
-        m_MethodName: LoadHighScore
+      - m_Target: {fileID: 1541770150}
+        m_TargetAssemblyTypeName: RunProgressTracker, Assembly-CSharp
+        m_MethodName: ResetProgress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3386,7 +3419,19 @@ MonoBehaviour:
         m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   holdTime: 0.1
 --- !u!114 &1177252643
 MonoBehaviour:
@@ -3431,10 +3476,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 17db798ef9befa040bcd282573f43096, type: 2}
-        m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
+      - m_Target: {fileID: 1796599611}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3442,6 +3487,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1713005941}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
@@ -4810,8 +4867,8 @@ RectTransform:
   - {fileID: 1716682552}
   - {fileID: 1268399159}
   - {fileID: 918498548}
-  - {fileID: 1089491056}
   - {fileID: 885026339}
+  - {fileID: 1089491056}
   m_Father: {fileID: 1742760593}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

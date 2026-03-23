@@ -5,6 +5,13 @@ public class WorldScroller : MonoBehaviour
     public FloatData speed;
     public bool isRunning = true;
 
+    private Vector3 startPosition;
+
+    private void Awake()
+    {
+        startPosition = transform.position;
+    }
+
     private void FixedUpdate()
     {
         if (!isRunning || speed == null) return;
@@ -17,4 +24,15 @@ public class WorldScroller : MonoBehaviour
     public void StopRun() => isRunning = false;
     public void PauseRun() => isRunning = false;
     public void ResumeRun() => isRunning = true;
+
+    public void ResetScrollPosition()
+    {
+        transform.position = startPosition;
+    }
+
+    public void ResetAndStop()
+    {
+        isRunning = false;
+        transform.position = startPosition;
+    }
 }
