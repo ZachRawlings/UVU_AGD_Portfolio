@@ -214,7 +214,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-*.png
 
 
 UnityProject/Assets/Brawl Arena/
@@ -222,13 +221,3 @@ UnityProject/Assets/Brawl Arena/
 UnityProject/Assets/Mini Simple Characters Skeleton Demo/
 
 Simple Puzzle Game/
-
-Shroom Scramble/Assets/2D Casual UI/
-
-Shroom Scramble/Assets/300Mind/
-
-Shroom Scramble/Assets/dreamtools/
-
-Shroom Scramble/Assets/Images/
-
-Shroom Scramble/Assets/maanetorn/
