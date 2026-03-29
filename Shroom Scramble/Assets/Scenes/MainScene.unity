@@ -280,8 +280,8 @@ MonoBehaviour:
   gameplaySpawner: {fileID: 2089354923}
   isRunning: 1
   chunkLength: 200
-  chunksAhead: 3
-  cleanupBehind: 2
+  chunksAhead: 2
+  cleanupBehind: 1
 --- !u!1 &42408826
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,6 +3050,8 @@ MonoBehaviour:
   groundParent: {fileID: 1166217409}
   groundPrefabs:
   - {fileID: 3535874599674866434, guid: 1d92d3e23393e854085638d8a29607f5, type: 3}
+  - {fileID: 2497550477446269366, guid: 61ee8e6f2a1fffc42b65468bf14e6159, type: 3}
+  - {fileID: 4546159141075945869, guid: f460d02017827f04dbfa607c9b9ebe2f, type: 3}
   chunkLength: 200
   gameplayXOffset: 0
   groundYOffset: -3
