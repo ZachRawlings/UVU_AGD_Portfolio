@@ -5,17 +5,17 @@ public class GameplayChunkSpawner : MonoBehaviour
 {
     public Transform spawnedParent;
     public ObstaclePatternPlanner patternPlanner;
-    
+
     [Header("First Chunk Safety")]
     public bool useFirstChunkObstacleDelay = true;
     public float firstChunkObstacleStartZ = 40f;
 
     public bool useFirstChunkCollectibleDelay = true;
     public float firstChunkCollectibleStartZ = 20f;
-    
+
     [Header("Collectible Rules")]
     public bool oneCollectiblePerBand = true;
-    
+
     [Header("Grid")]
     public float[] laneX = { -2f, 0f, 2f };
     public float[] rowY = { -1.2f, 0f, 1.2f };
@@ -36,6 +36,11 @@ public class GameplayChunkSpawner : MonoBehaviour
     public int obstacleBandsPerChunkMin = 2;
     public int obstacleBandsPerChunkMax = 4;
 
+    [Header("Obstacle Variation")]
+    public Vector3 obstacleRotationVariation = new Vector3(0f, 15f, 0f);
+    public float obstacleScaleMin = 0.95f;
+    public float obstacleScaleMax = 1.05f;
+
     [Header("Collectibles")]
     public int collectibleGroupsPerChunkMin = 3;
     public int collectibleGroupsPerChunkMax = 6;
@@ -55,7 +60,8 @@ public class GameplayChunkSpawner : MonoBehaviour
     {
         List<GameObject> created = new();
 
-        if (!HasValidGrid()) return created;
+        if (!HasValidGrid())
+            return created;
 
         HashSet<SpawnCell> usedCells = new();
         List<BandPlan> plans = BuildBandPlans(zStart);
@@ -105,7 +111,7 @@ public class GameplayChunkSpawner : MonoBehaviour
     private void SpawnObstaclePatterns(int chunkIndex, List<BandPlan> plans, List<GameObject> created, HashSet<SpawnCell> usedCells)
     {
         if (obstaclePrefabs == null || obstaclePrefabs.Length == 0) return;
-        if (plans.Count == 0) return;
+        if (plans == null || plans.Count == 0) return;
 
         int targetPatternCount = Random.Range(obstacleBandsPerChunkMin, obstacleBandsPerChunkMax + 1);
         targetPatternCount = Mathf.Clamp(targetPatternCount, 0, plans.Count);
@@ -157,7 +163,9 @@ public class GameplayChunkSpawner : MonoBehaviour
         ApplyBlockedCellsToPlan(plan, blocked);
 
         foreach (SpawnCell cell in plan.blockedCells)
+        {
             TrySpawnAtCell(obstaclePrefabs, plan, cell.lane, cell.row, created, usedCells);
+        }
 
         return plan.safeCells.Count > 0
             ? plan.safeCells[Random.Range(0, plan.safeCells.Count)]
@@ -181,10 +189,14 @@ public class GameplayChunkSpawner : MonoBehaviour
         ApplyBlockedCellsToPlan(second, patternPlanner.BuildFullWallExceptSafe(second.bandIndex, secondSafeLane, secondSafeRow));
 
         foreach (SpawnCell cell in first.blockedCells)
+        {
             TrySpawnAtCell(obstaclePrefabs, first, cell.lane, cell.row, created, usedCells);
+        }
 
         foreach (SpawnCell cell in second.blockedCells)
+        {
             TrySpawnAtCell(obstaclePrefabs, second, cell.lane, cell.row, created, usedCells);
+        }
 
         return new SpawnCell(second.bandIndex, secondSafeLane, secondSafeRow);
     }
@@ -196,7 +208,9 @@ public class GameplayChunkSpawner : MonoBehaviour
 
         HashSet<(int lane, int row)> blockedSet = new();
         foreach (SpawnCell cell in blocked)
+        {
             blockedSet.Add((cell.lane, cell.row));
+        }
 
         if (blockedSet.Count >= 9)
         {
@@ -210,73 +224,76 @@ public class GameplayChunkSpawner : MonoBehaviour
             for (int row = 0; row < 3; row++)
             {
                 SpawnCell cell = new(plan.bandIndex, lane, row);
-                if (blockedSet.Contains((lane, row))) plan.blockedCells.Add(cell);
-                else plan.safeCells.Add(cell);
+
+                if (blockedSet.Contains((lane, row)))
+                    plan.blockedCells.Add(cell);
+                else
+                    plan.safeCells.Add(cell);
             }
         }
     }
 
     private void SpawnCollectibles(int chunkIndex, List<BandPlan> plans, List<GameObject> created, HashSet<SpawnCell> usedCells)
-{
-    if (collectiblePrefabs == null || collectiblePrefabs.Length == 0) return;
-    if (plans == null || plans.Count == 0) return;
-
-    List<int> candidateBands = new();
-    for (int i = 0; i < plans.Count; i++)
     {
-        if (useFirstChunkCollectibleDelay && chunkIndex == 0 && plans[i].z < firstChunkCollectibleStartZ)
-            continue;
+        if (collectiblePrefabs == null || collectiblePrefabs.Length == 0) return;
+        if (plans == null || plans.Count == 0) return;
 
-        candidateBands.Add(i);
-    }
-
-    if (candidateBands.Count == 0) return;
-
-    int targetBands = Random.Range(collectibleGroupsPerChunkMin, collectibleGroupsPerChunkMax + 1);
-    targetBands = Mathf.Clamp(targetBands, 0, candidateBands.Count);
-
-    Shuffle(candidateBands);
-
-    int placed = 0;
-
-    for (int i = 0; i < candidateBands.Count && placed < targetBands; i++)
-    {
-        int bandIndex = candidateBands[i];
-        BandPlan plan = plans[bandIndex];
-
-        SpawnCell cell = PickCollectibleCell(plan);
-        if (cell.lane < 0 || cell.row < 0)
-            continue;
-
-        if (TrySpawnAtCell(collectiblePrefabs, plan, cell.lane, cell.row, created, usedCells))
+        List<int> candidateBands = new();
+        for (int i = 0; i < plans.Count; i++)
         {
-            placed++;
+            if (useFirstChunkCollectibleDelay && chunkIndex == 0 && plans[i].z < firstChunkCollectibleStartZ)
+                continue;
 
-            if (!oneCollectiblePerBand)
+            candidateBands.Add(i);
+        }
+
+        if (candidateBands.Count == 0) return;
+
+        int targetBands = Random.Range(collectibleGroupsPerChunkMin, collectibleGroupsPerChunkMax + 1);
+        targetBands = Mathf.Clamp(targetBands, 0, candidateBands.Count);
+
+        Shuffle(candidateBands);
+
+        int placed = 0;
+
+        for (int i = 0; i < candidateBands.Count && placed < targetBands; i++)
+        {
+            int bandIndex = candidateBands[i];
+            BandPlan plan = plans[bandIndex];
+
+            SpawnCell cell = PickCollectibleCell(plan);
+            if (cell.lane < 0 || cell.row < 0)
+                continue;
+
+            if (TrySpawnAtCell(collectiblePrefabs, plan, cell.lane, cell.row, created, usedCells))
             {
-                int extraCount = Random.Range(
-                    Mathf.Max(0, collectibleChainLengthMin - 1),
-                    Mathf.Max(0, collectibleChainLengthMax - 1) + 1
-                );
+                placed++;
 
-                List<SpawnCell> extraCandidates = new(plan.safeCells);
-                Shuffle(extraCandidates);
-
-                int extrasPlaced = 0;
-                for (int c = 0; c < extraCandidates.Count && extrasPlaced < extraCount; c++)
+                if (!oneCollectiblePerBand)
                 {
-                    SpawnCell extra = extraCandidates[c];
+                    int extraCount = Random.Range(
+                        Mathf.Max(0, collectibleChainLengthMin - 1),
+                        Mathf.Max(0, collectibleChainLengthMax - 1) + 1
+                    );
 
-                    if (extra.lane == cell.lane && extra.row == cell.row)
-                        continue;
+                    List<SpawnCell> extraCandidates = new(plan.safeCells);
+                    Shuffle(extraCandidates);
 
-                    if (TrySpawnAtCell(collectiblePrefabs, plan, extra.lane, extra.row, created, usedCells))
-                        extrasPlaced++;
+                    int extrasPlaced = 0;
+                    for (int c = 0; c < extraCandidates.Count && extrasPlaced < extraCount; c++)
+                    {
+                        SpawnCell extra = extraCandidates[c];
+
+                        if (extra.lane == cell.lane && extra.row == cell.row)
+                            continue;
+
+                        if (TrySpawnAtCell(collectiblePrefabs, plan, extra.lane, extra.row, created, usedCells))
+                            extrasPlaced++;
+                    }
                 }
             }
         }
     }
-}
 
     private void SpawnPowerups(List<BandPlan> plans, List<GameObject> created, HashSet<SpawnCell> usedCells)
     {
@@ -295,7 +312,9 @@ public class GameplayChunkSpawner : MonoBehaviour
 
         List<int> candidateBands = new();
         for (int i = 0; i < plans.Count; i++)
+        {
             candidateBands.Add(i);
+        }
 
         Shuffle(candidateBands);
 
@@ -359,15 +378,18 @@ public class GameplayChunkSpawner : MonoBehaviour
             if (cell.lane == lane && cell.row == row)
                 return true;
         }
+
         return false;
     }
 
     private bool TrySpawnAtCell(GameObject[] prefabs, BandPlan plan, int lane, int row, List<GameObject> created, HashSet<SpawnCell> usedCells)
     {
-        if (prefabs == null || prefabs.Length == 0 || plan == null) return false;
+        if (prefabs == null || prefabs.Length == 0 || plan == null)
+            return false;
 
         SpawnCell cell = new(plan.bandIndex, lane, row);
-        if (usedCells.Contains(cell)) return false;
+        if (usedCells.Contains(cell))
+            return false;
 
         usedCells.Add(cell);
 
@@ -380,7 +402,24 @@ public class GameplayChunkSpawner : MonoBehaviour
         GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
         GameObject go = Instantiate(prefab, spawnedParent);
         go.transform.localPosition = localPos;
-        go.transform.localRotation = Quaternion.identity;
+
+        Quaternion rotation = Quaternion.identity;
+        bool isObstacle = prefabs == obstaclePrefabs;
+
+        if (isObstacle)
+        {
+            float rotX = Random.Range(-obstacleRotationVariation.x, obstacleRotationVariation.x);
+            float rotY = Random.Range(-obstacleRotationVariation.y, obstacleRotationVariation.y);
+            float rotZ = Random.Range(-obstacleRotationVariation.z, obstacleRotationVariation.z);
+
+            rotation = Quaternion.Euler(rotX, rotY, rotZ);
+
+            Vector3 baseScale = go.transform.localScale;
+            float scaleMultiplier = Random.Range(obstacleScaleMin, obstacleScaleMax);
+            go.transform.localScale = baseScale * scaleMultiplier;
+        }
+
+        go.transform.localRotation = rotation;
 
         created.Add(go);
         return true;
@@ -409,7 +448,7 @@ public class GameplayChunkSpawner : MonoBehaviour
             (list[i], list[swapIndex]) = (list[swapIndex], list[i]);
         }
     }
-    
+
     private SpawnCell PickPowerupCell(BandPlan plan, HashSet<SpawnCell> usedCells)
     {
         if (plan == null)
