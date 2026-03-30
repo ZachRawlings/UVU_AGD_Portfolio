@@ -127,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2870201516167964274}
   - component: {fileID: 7630310595190662948}
+  - component: {fileID: 8137550363824332587}
   m_Layer: 0
   m_Name: Path Piece 2
   m_TagString: Untagged
@@ -207,6 +208,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8137550363824332587
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135576065869327850}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2793607953160231775
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1557049683996118235}
   - component: {fileID: 2405268095840191814}
+  - component: {fileID: 9179528040559553054}
   m_Layer: 0
   m_Name: Path Piece 6
   m_TagString: Untagged
@@ -297,6 +320,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &9179528040559553054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793607953160231775}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480005, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0.0000009536743}
 --- !u!1 &2798700131241943178
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5295413133037574138}
   - component: {fileID: 9055535294068184784}
+  - component: {fileID: 891459813494996521}
   m_Layer: 0
   m_Name: Path Piece 3
   m_TagString: Untagged
@@ -592,6 +637,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &891459813494996521
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655898586946681307}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3805885577114749776
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5845187705638693753}
   - component: {fileID: 9056412037375753337}
+  - component: {fileID: 421286514613788459}
   m_Layer: 0
   m_Name: Path Piece 4
   m_TagString: Untagged
@@ -761,6 +828,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &421286514613788459
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895075057780991848}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5240780749457183810
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1374199526070390232}
   - component: {fileID: 9048716494624108928}
+  - component: {fileID: 6799668241148951264}
   m_Layer: 0
   m_Name: Path Piece 1
   m_TagString: Untagged
@@ -916,6 +1005,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &6799668241148951264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165470836989274590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480001, z: 0.20000005}
+  m_Center: {x: 0, y: 0.000030517578, z: 0.0000009536743}
 --- !u!1 &6881196659841584453
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +1070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6719505415408801217}
   - component: {fileID: 7811312641676084246}
+  - component: {fileID: 8219863852260639696}
   m_Layer: 0
   m_Name: Path Piece
   m_TagString: Untagged
@@ -1040,6 +1151,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8219863852260639696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459643503003065375}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480007, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7975822452122124651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,6 +1232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612652325029394433}
   - component: {fileID: 4544915772748584501}
+  - component: {fileID: 2941921061162330203}
   m_Layer: 0
   m_Name: Path Piece 5
   m_TagString: Untagged
@@ -1180,6 +1313,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &2941921061162330203
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8150483514336707492}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.479998, y: 20.480001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &36626525624368618
 PrefabInstance:
   m_ObjectHideFlags: 0
