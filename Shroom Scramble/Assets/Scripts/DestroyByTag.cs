@@ -2,12 +2,19 @@ using UnityEngine;
 
 public class DestroyByTag : MonoBehaviour
 {
-    public string tagToDestroy = "Spawns";
+    [Tooltip("Add all tags you want to destroy")]
+    public string[] tagsToDestroy;
 
     public void DestroyAll()
     {
-        var objs = GameObject.FindGameObjectsWithTag(tagToDestroy);
-        for (int i = 0; i < objs.Length; i++)
-            Destroy(objs[i]);
+        for (int t = 0; t < tagsToDestroy.Length; t++)
+        {
+            var objs = GameObject.FindGameObjectsWithTag(tagsToDestroy[t]);
+
+            for (int i = 0; i < objs.Length; i++)
+            {
+                Destroy(objs[i]);
+            }
+        }
     }
 }
