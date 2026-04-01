@@ -5668,7 +5668,7 @@ MonoBehaviour:
   obstaclePrefabs:
   - {fileID: 2106696006495161297, guid: 54618a3df594ec04aa35d83c5d9a3902, type: 3}
   collectiblePrefabs:
-  - {fileID: 9000239118325806427, guid: dea7d5b0ba8cdda42ac69b0a2e5bb6eb, type: 3}
+  - {fileID: 4502900044224939268, guid: 0b4738c8b4de8b44da531769ebdb3d2d, type: 3}
   powerupPrefabs:
   - {fileID: 2182231270823966663, guid: 59d2015be03a08241ba98e06940966a8, type: 3}
   - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
@@ -5758,11 +5758,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 410087041}
+  - {fileID: 733520012}
   - {fileID: 832575519}
   - {fileID: 1742760593}
   - {fileID: 706581253}
   - {fileID: 1357764727}
   - {fileID: 7192369824047946287}
   - {fileID: 780827870}
-  - {fileID: 733520012}
   - {fileID: 44787245}
