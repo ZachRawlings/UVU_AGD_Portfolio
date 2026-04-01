@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8078012642225383554}
   - component: {fileID: 4099860178952932087}
   - component: {fileID: 9048852466999180584}
+  - component: {fileID: 7313566853146913534}
   m_Layer: 0
   m_Name: PlayerRoot 1
   m_TagString: Player
@@ -296,6 +297,53 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4437985585523302301}
+        m_TargetAssemblyTypeName: TimedActive, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  respondLateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  holdTime: 0.1
+--- !u!114 &7313566853146913534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009799777319277898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65180f705bb904ee98a80edc6dcf0d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameActionHandler
+  action: {fileID: 11400000, guid: 4310d7debdc3d67419df706e6bb71435, type: 2}
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  respondEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 113826232239469994}
+        m_TargetAssemblyTypeName: PlayerLaneMover, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   respondLateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -362,3 +410,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5850754204593938109, guid: 91a34e3419cdf6244b33219a714c2bbc, type: 3}
   m_PrefabInstance: {fileID: 8777916498951162196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4437985585523302301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4920051665176745673, guid: 91a34e3419cdf6244b33219a714c2bbc, type: 3}
+  m_PrefabInstance: {fileID: 8777916498951162196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c4f7b8b28258042adbc12a356d1fe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimedActive
