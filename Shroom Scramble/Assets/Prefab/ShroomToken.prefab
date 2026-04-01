@@ -74,6 +74,9 @@ MonoBehaviour:
   startEvent:
     m_PersistentCalls:
       m_Calls: []
+  requiredTags:
+  - Player
+  - PowerUp
   triggerEnterEvent:
     m_PersistentCalls:
       m_Calls:
