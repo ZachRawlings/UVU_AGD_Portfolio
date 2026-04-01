@@ -5666,12 +5666,11 @@ MonoBehaviour:
   zBandsPerChunk: 5
   bandEdgePadding: 0.1
   obstaclePrefabs:
-  - {fileID: 3873500812057738929, guid: 09756bb6e4ef2244d94708b9c4e3accf, type: 3}
+  - {fileID: 2106696006495161297, guid: 54618a3df594ec04aa35d83c5d9a3902, type: 3}
   collectiblePrefabs:
-  - {fileID: 8092272368976777395, guid: 5f878f1425221524d91f88b0cef05b6f, type: 3}
-  - {fileID: 2029477118467662059, guid: d533a8150f927ac40b4554492843a7ef, type: 3}
+  - {fileID: 9000239118325806427, guid: dea7d5b0ba8cdda42ac69b0a2e5bb6eb, type: 3}
   powerupPrefabs:
-  - {fileID: 6075223812468990976, guid: 3d1d2afd00130f249967506234e3b00f, type: 3}
+  - {fileID: 2182231270823966663, guid: 59d2015be03a08241ba98e06940966a8, type: 3}
   - {fileID: 7304213894623883578, guid: 26583f047c31ae44aa55d69554f36dd7, type: 3}
   obstacleBandsPerChunkMin: 8
   obstacleBandsPerChunkMax: 12
