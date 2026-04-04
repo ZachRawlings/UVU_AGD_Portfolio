@@ -279,6 +279,8 @@ MonoBehaviour:
   - Spawns
   - Obstacle
   - PowerUp
+  - Coin
+  - Heal
 --- !u!1 &163807139
 GameObject:
   m_ObjectHideFlags: 0
@@ -5153,6 +5155,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 1632570389519365568, guid: 920ff3b743e2f7a408cca22a7e6655dc, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+    - target: {fileID: 1697614726393532656, guid: 920ff3b743e2f7a408cca22a7e6655dc, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
     - target: {fileID: 3184138076112997834, guid: 920ff3b743e2f7a408cca22a7e6655dc, type: 3}
       propertyPath: SizeModule.enabled
       value: 0

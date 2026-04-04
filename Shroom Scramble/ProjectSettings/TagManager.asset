@@ -7,6 +7,8 @@ TagManager:
   - Spawns
   - Obstacle
   - PowerUp
+  - Coin
+  - Heal
   layers:
   - Default
   - TransparentFX
