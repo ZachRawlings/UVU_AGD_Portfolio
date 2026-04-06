@@ -15,31 +15,35 @@ public class IntData : ScriptableObject
         get => value;
         set
         {
+            Debug.Log($"{name} Value set from {this.value} to {value}\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}", this);
             this.value = value;
             onValueChanged.Invoke();
             ClampValue();
         }
     }
 
+    public void SetValue(IntData data)
+    {
+        Debug.Log($"{name} SetValue(IntData {data.name})", this);
+        Value = data.Value;
+    }
+
+    public void SetValue(int data)
+    {
+        Debug.Log($"{name} SetValue(int {data})", this);
+        Value = data;
+    }
+
     public void UpdateValue(int amount)
     {
+        Debug.Log($"{name} UpdateValue({amount})", this);
         Value += amount;
     }
 
-    public void SetValue(IntData data)
-    {
-        value = data.value;
-    }
-    
-    public void SetValue(int data)
-    {
-        Value = data;
-    }
-    
     public void IncrementValue()
     {
-        value++;
-        onValueChanged.Invoke();
+        Debug.Log($"{name} IncrementValue()", this);
+        Value++;
     }
 
     private void ClampValue()
@@ -57,6 +61,6 @@ public class IntData : ScriptableObject
     public void UpdateValueZeroCheck(int i)
     {
         if (value + i < 0) return;
-        value += i;
+        Value += i;
     }
 }
