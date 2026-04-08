@@ -1,0 +1,2 @@
+C:\Users\Owner\Documents\UVU\UVU_AGD_Portfolio\Shroom Scramble\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\Owner\Documents\UVU\UVU_AGD_Portfolio\Shroom Scramble\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

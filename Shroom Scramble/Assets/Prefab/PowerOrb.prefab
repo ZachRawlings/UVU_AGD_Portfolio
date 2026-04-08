@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4313152562963543508}
   - component: {fileID: 1454445931374290066}
   - component: {fileID: 4324302516851998523}
-  - component: {fileID: 2059793135013861066}
+  - component: {fileID: -6734638761306828369}
   m_Layer: 0
   m_Name: PowerOrb
   m_TagString: PowerUp
@@ -113,7 +113,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2059793135013861066
+--- !u!114 &-6734638761306828369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,15 +132,14 @@ MonoBehaviour:
   startEvent:
     m_PersistentCalls:
       m_Calls: []
-  requiredTags:
-  - Player
+  requiredTags: []
   triggerEnterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 2182231270823966663}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

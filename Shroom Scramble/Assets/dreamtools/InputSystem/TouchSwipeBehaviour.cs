@@ -10,22 +10,24 @@ public class TouchSwipeBehaviour : MonoBehaviour
 
     [Header("Swipe Tuning")]
     [Tooltip("Minimum swipe distance in pixels.")]
-    public float minSwipeDistance = 80f;
+    public float minSwipeDistance = 60f;
 
     [Tooltip("Max time in seconds between press and release to count as swipe.")]
     public float maxSwipeTime = 0.35f;
 
     [Tooltip("Time delay between swipes to prevent multiple swipe detection.")]
-    private bool canSwipe = true;
-    public float swipeCooldown = 0.12f;   
-    
+    public float swipeCooldown = 0.10f;
+
+    [Header("Debug")]
+    public bool debugLogs = true;
+
     [Header("Output")]
     public TouchData touchData;
     public event Action<TouchData> sendTouchData;
 
     private bool isTouching;
+    private bool canSwipe = true;
 
-    // Keep these local (TouchData doesn't define them)
     private float swipeTime;
     private float swipeDistance;
 
@@ -44,10 +46,9 @@ public class TouchSwipeBehaviour : MonoBehaviour
             enabled = false;
             return;
         }
-        // If you didn't use/assign a TouchData asset before, auto-create one at runtime.
+
         if (touchData == null)
             touchData = ScriptableObject.CreateInstance<TouchData>();
-
 
         controls.gameInputsObj.Touch.PrimaryContact.started += StartTouchPrimary;
         controls.gameInputsObj.Touch.PrimaryContact.canceled += EndTouchPrimary;
@@ -86,13 +87,15 @@ public class TouchSwipeBehaviour : MonoBehaviour
         touchData.timeStart = (float)ctx.time;
         touchData.positionStart = ReadVector2Safe(controls.gameInputsObj.Touch.PrimaryPosition);
 
-        // Reset outputs
         touchData.timeEnd = touchData.timeStart;
         touchData.positionEnd = touchData.positionStart;
         touchData.direction = Vector2.zero;
 
         swipeTime = 0f;
         swipeDistance = 0f;
+
+        if (debugLogs)
+            Debug.Log($"Touch start at {touchData.positionStart}");
     }
 
     private void EndTouchPrimary(InputAction.CallbackContext ctx)
@@ -105,15 +108,28 @@ public class TouchSwipeBehaviour : MonoBehaviour
 
         ComputeSwipe();
 
+        if (debugLogs)
+            Debug.Log($"Swipe end. Distance={swipeDistance}, Time={swipeTime}, Direction={touchData.direction}");
+
         if (!canSwipe) return;
-        canSwipe = false;
-        StartCoroutine(SwipeCooldown());
-        
+
         if (swipeDistance >= minSwipeDistance && swipeTime <= maxSwipeTime)
+        {
+            canSwipe = false;
+            StartCoroutine(SwipeCooldown());
+
+            if (debugLogs)
+                Debug.Log("VALID SWIPE");
+
             sendTouchData?.Invoke(touchData);
-          
-        
+        }
+        else
+        {
+            if (debugLogs)
+                Debug.Log("SWIPE REJECTED");
+        }
     }
+
     private IEnumerator SwipeCooldown()
     {
         yield return new WaitForSeconds(swipeCooldown);
@@ -143,7 +159,8 @@ public class TouchSwipeBehaviour : MonoBehaviour
             touchData.direction = delta.normalized;
         else
             touchData.direction = Vector2.zero;
-        if(Mathf.Abs(touchData.direction.x) > Mathf.Abs(touchData.direction.y))
+
+        if (Mathf.Abs(touchData.direction.x) > Mathf.Abs(touchData.direction.y))
         {
             touchData.direction.y = 0;
             touchData.direction.x = Mathf.Sign(touchData.direction.x);
