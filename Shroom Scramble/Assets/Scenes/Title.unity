@@ -128,7 +128,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 92111050}
-  - component: {fileID: 92111049}
+  - component: {fileID: 92111051}
+  - component: {fileID: 92111053}
+  - component: {fileID: 92111052}
   m_Layer: 0
   m_Name: Stats
   m_TagString: Untagged
@@ -136,18 +138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &92111049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 92111048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 106748e0f6c31e943b51147102f23eca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PersistentStats
 --- !u!4 &92111050
 Transform:
   m_ObjectHideFlags: 0
@@ -163,6 +153,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92111051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92111048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9767d0b0bf324d3e88f5f16b8b49cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AwakeBehaviour
+  awakeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: fe53395b1a6794b4e8e7f00ec0c6886c, type: 2}
+        m_TargetAssemblyTypeName: DataStorage, Assembly-CSharp
+        m_MethodName: LoadAllData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &92111052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92111048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44357b205d87bcd4bb492427c860a37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SavedVolumeApplier
+  mixer: {fileID: 24100000, guid: e6fed941a7a4627429b6313efba7abf7, type: 2}
+  audioSource: {fileID: 518349934370042589, guid: 5862bf5d6f393184794cd231c57147b8, type: 3}
+  mixMode: 2
+  mixerVolumeParam: Volume
+  volumeData: {fileID: 11400000, guid: d9be87bef8fe7a74c9026a43f126b8a3, type: 2}
+--- !u!114 &92111053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92111048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44357b205d87bcd4bb492427c860a37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SavedVolumeApplier
+  mixer: {fileID: 24100000, guid: f1e12226d60acd8459d210e29904efc8, type: 2}
+  audioSource: {fileID: 0}
+  mixMode: 2
+  mixerVolumeParam: Volume
+  volumeData: {fileID: 11400000, guid: 40fadf3f1f8d2fc43bcd3dd7912f36ed, type: 2}
 --- !u!1 &402729228
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +442,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854050025}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &854050027
 Camera:
   m_ObjectHideFlags: 0
@@ -1044,7 +1095,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1259291224}
-  - component: {fileID: 1259291225}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1068,33 +1118,6 @@ Transform:
   - {fileID: 903367811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1259291225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259291223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9767d0b0bf324d3e88f5f16b8b49cf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AwakeBehaviour
-  awakeEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: fe53395b1a6794b4e8e7f00ec0c6886c, type: 2}
-        m_TargetAssemblyTypeName: DataStorage, Assembly-CSharp
-        m_MethodName: LoadAllData
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1946377971
 GameObject:
   m_ObjectHideFlags: 0
