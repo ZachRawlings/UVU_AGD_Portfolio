@@ -5,7 +5,12 @@ using UnityEngine;
 public class PlayerLaneMover : MonoBehaviour
 {
     [Header("Refs")]
-    public Transform visual;
+    // Allow multiple visual transforms to be assigned in the Inspector
+    public Transform[] visuals;
+    [Header("Camera")]
+    [Tooltip("Assign a Camera (or its transform) to smoothly follow the player. Keeps initial offset.")]
+    public Transform cameraSlot;
+    public float cameraSmoothTime = 0.12f;
 
     [Header("Lanes")]
     public float[] laneXPositions = { -2f, 0f, 2f };
@@ -23,10 +28,30 @@ public class PlayerLaneMover : MonoBehaviour
     private float fixedZ;
 
     private float xVel;
-    private float visualYVel;
+    // Per-visual smooth velocity for SmoothDamp
+    private float[] visualYVels;
 
     private Rigidbody rb;
+    // Camera follow state (Y-only)
+    private float cameraYOffset;
+    // SmoothDamp velocity for Y-only smoothing
+    private float cameraYVel;
     
+    // Returns the world Y of the player visual (first valid visual). Falls back to this.transform if none.
+    private float GetVisualWorldY()
+    {
+        if (visuals != null)
+        {
+            for (int i = 0; i < visuals.Length; i++)
+            {
+                var v = visuals[i];
+                if (v != null)
+                    return v.position.y;
+            }
+        }
+        return transform.position.y;
+    }
+
     public bool isRunning = true;
 
     public void PauseRun() => isRunning = false;
@@ -41,14 +66,29 @@ public class PlayerLaneMover : MonoBehaviour
         baseY = transform.position.y;
         fixedZ = transform.position.z;
 
-        if (visual == null && transform.childCount > 0)
-            visual = transform.GetChild(0);
-
-        if (visual != null)
+        // If no visuals assigned in the inspector, default to using child transforms
+        if ((visuals == null || visuals.Length == 0) && transform.childCount > 0)
         {
-            // Store the neutral Y position of the visual
-            visualBaseLocalY = visual.localPosition.y;  // Note: I moved this to a field below
+            visuals = new Transform[transform.childCount];
+            for (int i = 0; i < transform.childCount; i++)
+                visuals[i] = transform.GetChild(i);
         }
+
+        // Setup per-visual base local Y and per-visual velocities
+        if (visuals != null && visuals.Length > 0)
+        {
+            visualBaseLocalYs = new float[visuals.Length];
+            visualYVels = new float[visuals.Length];
+            for (int i = 0; i < visuals.Length; i++)
+            {
+                if (visuals[i] != null)
+                    visualBaseLocalYs[i] = visuals[i].localPosition.y;
+            }
+        }
+
+        // Store camera Y offset relative to the visual if a camera slot is assigned
+        if (cameraSlot != null)
+            cameraYOffset = cameraSlot.position.y - GetVisualWorldY();
 
         SnapToLaneNow();
     }
@@ -66,12 +106,26 @@ public class PlayerLaneMover : MonoBehaviour
         rb.MovePosition(new Vector3(newX, baseY, fixedZ));
 
         // Vertical visual row movement (smooth)
-        if (visual != null)
+        if (visuals != null && visuals.Length > 0)
         {
-            float targetLocalY = visualBaseLocalY + currentRowOffset;
-            var lp = visual.localPosition;
-            float newLocalY = Mathf.SmoothDamp(lp.y, targetLocalY, ref visualYVel, visualYSmoothTime);
-            visual.localPosition = new Vector3(lp.x, newLocalY, lp.z);
+            for (int i = 0; i < visuals.Length; i++)
+            {
+                var v = visuals[i];
+                if (v == null) continue;
+                float targetLocalY = visualBaseLocalYs[i] + currentRowOffset;
+                var lp = v.localPosition;
+                float newLocalY = Mathf.SmoothDamp(lp.y, targetLocalY, ref visualYVels[i], visualYSmoothTime);
+                v.localPosition = new Vector3(lp.x, newLocalY, lp.z);
+            }
+        }
+
+        // Smoothly follow camera's Y to the player visual's Y + stored offset (keep camera X/Z unchanged)
+        if (cameraSlot != null)
+        {
+            float visualY = GetVisualWorldY();
+            float targetY = visualY + cameraYOffset;
+            float newY = Mathf.SmoothDamp(cameraSlot.position.y, targetY, ref cameraYVel, cameraSmoothTime);
+            cameraSlot.position = new Vector3(cameraSlot.position.x, newY, cameraSlot.position.z);
         }
     }
 
@@ -100,6 +154,13 @@ public class PlayerLaneMover : MonoBehaviour
         currentRowOffset = 0f;
     }
 
+    // Recalculate the camera offset (call if you change camera position or swap cameras at runtime)
+    public void RecalculateCameraOffset()
+    {
+        if (cameraSlot != null)
+            cameraYOffset = cameraSlot.position.y - GetVisualWorldY();
+    }
+
     private void SnapToLaneNow()
     {
         laneIndex = Mathf.Clamp(laneIndex, 0, laneXPositions.Length - 1);
@@ -107,5 +168,5 @@ public class PlayerLaneMover : MonoBehaviour
     }
 
     // Private field (was missing declaration in previous version)
-    private float visualBaseLocalY;
+    private float[] visualBaseLocalYs;
 }

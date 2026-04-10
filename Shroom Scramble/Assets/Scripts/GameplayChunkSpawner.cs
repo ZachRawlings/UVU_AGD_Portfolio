@@ -12,6 +12,9 @@ public class GameplayChunkSpawner : MonoBehaviour
 
     public bool useFirstChunkCollectibleDelay = true;
     public float firstChunkCollectibleStartZ = 20f;
+    
+    public bool useFirstChunkPowerupDelay = true;
+    public float firstChunkPowerupStartZ = 20f;
 
     [Header("Collectible Rules")]
     public bool oneCollectiblePerBand = true;
@@ -68,7 +71,7 @@ public class GameplayChunkSpawner : MonoBehaviour
 
         SpawnObstaclePatterns(chunkIndex, plans, created, usedCells);
         SpawnCollectibles(chunkIndex, plans, created, usedCells);
-        SpawnPowerups(plans, created, usedCells);
+        SpawnPowerups(chunkIndex, plans, created, usedCells);
 
         return created;
     }
@@ -295,7 +298,7 @@ public class GameplayChunkSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnPowerups(List<BandPlan> plans, List<GameObject> created, HashSet<SpawnCell> usedCells)
+    private void SpawnPowerups(int chunkIndex, List<BandPlan> plans, List<GameObject> created, HashSet<SpawnCell> usedCells)
     {
         if (powerupPrefabs == null || powerupPrefabs.Length == 0) return;
         if (plans == null || plans.Count == 0) return;
@@ -313,6 +316,10 @@ public class GameplayChunkSpawner : MonoBehaviour
         List<int> candidateBands = new();
         for (int i = 0; i < plans.Count; i++)
         {
+            // Respect first-chunk powerup safety: skip early bands in the first chunk
+            if (useFirstChunkPowerupDelay && chunkIndex == 0 && plans[i].z < firstChunkPowerupStartZ)
+                continue;
+
             candidateBands.Add(i);
         }
 
@@ -403,7 +410,9 @@ public class GameplayChunkSpawner : MonoBehaviour
         GameObject go = Instantiate(prefab, spawnedParent);
         go.transform.localPosition = localPos;
 
-        Quaternion rotation = Quaternion.identity;
+        // By default, preserve the prefab's stored rotation when spawning.
+        // For obstacles we override with randomized rotation and optional scale variation.
+        Quaternion rotation = prefab.transform.localRotation;
         bool isObstacle = prefabs == obstaclePrefabs;
 
         if (isObstacle)

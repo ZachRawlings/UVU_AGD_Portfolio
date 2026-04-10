@@ -1,0 +1,10 @@
+# ninja log v5
+17	780	7974786529013926	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c070d55202860d38
+30	788	7974786529023938	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	815752f7a04c4ad9
+0	805	7974786529267261	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	83b8c27f63f2389a
+37	809	7974786529309135	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	3eee0c90c299a3cd
+6	862	7974786529836976	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	9f4e24a04507bb94
+45	912	7974786530345393	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	25f261c39d811bdd
+23	1005	7974786531257180	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	1b32c761656aad44
+11	1077	7974786531913554	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b155531fe4e14d05
+1077	1155	7974786532779845	C:/Users/Owner/Documents/UVU/UVU_AGD_Portfolio/Shroom Scramble/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/52725748/obj/arm64-v8a/libgame.so	b1a4455d560f44a7

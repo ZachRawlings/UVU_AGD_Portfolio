@@ -5,39 +5,21 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(-1000)]
 public class AudioSlider : MonoBehaviour
 {
-    [SerializeField]
-    private AudioMixer Mixer;
-    [SerializeField]
-    private AudioSource AudioSource;
-    [SerializeField]
-    private AudioMixMode MixMode;
+    [Header("Audio")]
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioMixMode mixMode;
+    [SerializeField] private string mixerVolumeParam = "Volume";
 
-    // Optional UI slider to update visually when restoring saved value
-    [SerializeField]
-    private Slider Slider;
+    [Header("Saved Value")]
+    [SerializeField] private FloatData volumeData;
 
-    // PlayerPrefs key for saved volume
-    [SerializeField]
-    private string volumePrefKey = "Volume";
-    // Exposed parameter name on the AudioMixer
-    [SerializeField]
-    private string mixerVolumeParam = "Volume";
+    [Header("UI")]
+    [SerializeField] private Slider slider;
 
-    // Small epsilon to avoid Mathf.Log10(0)
     private const float k_LogEpsilon = 0.0001f;
 
-    public void OnChangeSlider(float Value)
-    {
-        // Apply immediately
-        ApplyValue(Value);
-
-        // Save raw slider value so we can restore it later and apply the correct conversion on load
-        PlayerPrefs.SetFloat(volumePrefKey, Value);
-        PlayerPrefs.Save();
-        Debug.Log($"AudioSlider: saved '{volumePrefKey}' = {Value}", this);
-    }
-
-    public enum  AudioMixMode
+    public enum AudioMixMode
     {
         LinearAudioSourceVolume,
         LinearMixerVolume,
@@ -46,89 +28,86 @@ public class AudioSlider : MonoBehaviour
 
     private void Awake()
     {
-        // Restore saved value (default 1f)
-        float saved = PlayerPrefs.GetFloat(volumePrefKey, 1f);
-        Debug.Log($"AudioSlider: restoring '{volumePrefKey}' = {saved}", this);
+        if (slider == null)
+            slider = GetComponent<Slider>() ?? GetComponentInChildren<Slider>();
 
-        // Apply the saved value to audio systems
-        ApplyValue(saved);
-
-        // If the serialized Slider reference wasn't set, try to find one on this GameObject or its children
-        if (Slider == null)
-        {
-            Slider = GetComponent<Slider>() ?? GetComponentInChildren<Slider>();
-        }
-
-        // Update slider UI if present without invoking callbacks
-        if (Slider != null)
-        {
-            // Clamp the saved value to the slider's range before setting
-            float target = Mathf.Clamp(saved, Slider.minValue, Slider.maxValue);
-
-            // Use SetValueWithoutNotify to avoid re-saving/applying via OnChangeSlider
-#if UNITY_2019_1_OR_NEWER
-            Slider.SetValueWithoutNotify(target);
-#else
-            Slider.value = target;
-#endif
-        }
-        else
-        {
-            Debug.LogWarning("AudioSlider: UI Slider not assigned and none found on GameObject; assign manually to see UI reflect saved value.", this);
-        }
+        ApplySavedValueToAudio();
+        ApplySavedValueToSlider();
     }
 
     private void OnEnable()
     {
-        // Re-apply saved value in case the component was disabled/enabled after Awake
-        float saved = PlayerPrefs.GetFloat(volumePrefKey, 1f);
-        ApplyValue(saved);
+        ApplySavedValueToAudio();
+        ApplySavedValueToSlider();
+    }
 
-        if (Slider == null)
-            Slider = GetComponent<Slider>() ?? GetComponentInChildren<Slider>();
+    public void OnChangeSlider(float value)
+    {
+        if (volumeData != null)
+            volumeData.SetValue(value);
 
-        if (Slider != null)
-        {
-            float target = Mathf.Clamp(saved, Slider.minValue, Slider.maxValue);
+        ApplyValue(value);
+    }
+
+    public void RefreshFromSavedData()
+    {
+        ApplySavedValueToAudio();
+        ApplySavedValueToSlider();
+    }
+
+    private void ApplySavedValueToAudio()
+    {
+        float savedValue = GetSavedValue();
+        ApplyValue(savedValue);
+    }
+
+    private void ApplySavedValueToSlider()
+    {
+        if (slider == null)
+            slider = GetComponent<Slider>() ?? GetComponentInChildren<Slider>();
+
+        if (slider == null) return;
+
+        float savedValue = GetSavedValue();
+        float target = Mathf.Clamp(savedValue, slider.minValue, slider.maxValue);
+
 #if UNITY_2019_1_OR_NEWER
-            Slider.SetValueWithoutNotify(target);
+        slider.SetValueWithoutNotify(target);
 #else
-            Slider.value = target;
+        slider.value = target;
 #endif
-        }
+    }
+
+    private float GetSavedValue()
+    {
+        if (volumeData != null)
+            return volumeData.Value;
+
+        return 1f;
     }
 
     private void ApplyValue(float value)
     {
-        switch (MixMode)
+        switch (mixMode)
         {
             case AudioMixMode.LinearAudioSourceVolume:
-                if (AudioSource != null)
-                    AudioSource.volume = value;
-                else
-                    Debug.LogWarning("AudioSlider: AudioSource is not assigned (LinearAudioSourceVolume).", this);
+                if (audioSource != null)
+                    audioSource.volume = value;
                 break;
+
             case AudioMixMode.LinearMixerVolume:
-                if (Mixer != null)
+                if (mixer != null)
                 {
-                    // Map 0 -> -80 dB (mute), 1 -> +20 dB (or whatever your mixer expects)
                     float dB = (value <= 0f) ? -80f : (-80f + value * 100f);
-                    Mixer.SetFloat(mixerVolumeParam, dB);
-                }
-                else
-                {
-                    Debug.LogWarning("AudioSlider: Mixer is not assigned (LinearMixerVolume).", this);
+                    mixer.SetFloat(mixerVolumeParam, dB);
                 }
                 break;
+
             case AudioMixMode.LogrithmicMixerVolume:
-                if (Mixer != null)
+                if (mixer != null)
                 {
                     float safe = Mathf.Max(value, k_LogEpsilon);
-                    Mixer.SetFloat(mixerVolumeParam, Mathf.Log10(safe) * 20f);
-                }
-                else
-                {
-                    Debug.LogWarning("AudioSlider: Mixer is not assigned (LogrithmicMixerVolume).", this);
+                    mixer.SetFloat(mixerVolumeParam, Mathf.Log10(safe) * 20f);
                 }
                 break;
         }
