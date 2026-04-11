@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RunSpeedRamp : MonoBehaviour
@@ -17,7 +18,11 @@ public class RunSpeedRamp : MonoBehaviour
     [Header("State")]
     public bool isRunning = true;
 
+    [Header("Temporary Slow")]
+    public float currentSlowMultiplier = 1f;
+
     private int lastAppliedStep = -1;
+    private Coroutine slowRoutine;
 
     private void Start()
     {
@@ -30,21 +35,47 @@ public class RunSpeedRamp : MonoBehaviour
         if (distancePerStep <= 0f) return;
 
         int currentStep = Mathf.FloorToInt(progress.Distance / distancePerStep);
-        if (currentStep == lastAppliedStep) return;
 
-        float targetSpeed = startSpeed + (currentStep * speedIncreasePerStep);
+        if (currentStep != lastAppliedStep)
+            lastAppliedStep = currentStep;
+
+        ApplyCurrentSpeed();
+    }
+
+    private void ApplyCurrentSpeed()
+    {
+        float targetSpeed = startSpeed + (lastAppliedStep * speedIncreasePerStep);
         targetSpeed = Mathf.Min(targetSpeed, maxSpeed);
+        targetSpeed *= currentSlowMultiplier;
 
         speed.SetValue(targetSpeed);
-        lastAppliedStep = currentStep;
+    }
+
+    public void ApplyHitSlow(float multiplier, float duration)
+    {
+        if (slowRoutine != null)
+            StopCoroutine(slowRoutine);
+
+        slowRoutine = StartCoroutine(HitSlowRoutine(multiplier, duration));
+    }
+
+    private IEnumerator HitSlowRoutine(float multiplier, float duration)
+    {
+        currentSlowMultiplier = multiplier;
+        ApplyCurrentSpeed();
+
+        yield return new WaitForSeconds(duration);
+
+        currentSlowMultiplier = 1f;
+        ApplyCurrentSpeed();
+        slowRoutine = null;
     }
 
     public void ResetRamp()
     {
-        lastAppliedStep = -1;
-
-        if (speed != null)
-            speed.SetValue(startSpeed);
+        lastAppliedStep = 0;
+        currentSlowMultiplier = 1f;
+        ApplyCurrentSpeed();
     }
 
     public void PauseRun() => isRunning = false;

@@ -39,10 +39,15 @@ public class InventoryConfigBehaviour : MonoBehaviour
         foreach (var item in inventoryDataObj.storeDataObjList)
         {
             if (!item.UsedOrPurchase || item is not IInventoryItem storeItem ) continue;
-            if (storeItem.GameActionObj == null || storeItem.GameArt == null);
-            var element = Instantiate(storeItem.GameArt, transform);
-            var elementData = element.GetComponent<InventoryPrefabItemBehaviour>();
-            elementData.ConfigureGameObject(storeItem, i++);
+            {
+                if (storeItem.GameActionObj == null || storeItem.GameArt == null);
+                {
+                    var element = Instantiate(storeItem.GameArt, transform);
+                    var elementData = element.GetComponent<InventoryPrefabItemBehaviour>();
+                    elementData.ConfigureGameObject(storeItem, i++);
+                }
+            }
+           
         }
     }
 }

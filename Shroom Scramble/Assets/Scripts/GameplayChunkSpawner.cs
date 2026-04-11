@@ -438,15 +438,7 @@ public class GameplayChunkSpawner : MonoBehaviour
     {
         float bandSize = chunkLength / zBandsPerChunk;
         float bandStart = zStart + (band * bandSize);
-        float pad = bandSize * bandEdgePadding;
-
-        float usableStart = bandStart + pad;
-        float usableEnd = bandStart + bandSize - pad;
-
-        if (usableEnd <= usableStart)
-            return bandStart + (bandSize * 0.5f);
-
-        return Random.Range(usableStart, usableEnd);
+        return bandStart + (bandSize * 0.5f);
     }
 
     private void Shuffle<T>(List<T> list)
