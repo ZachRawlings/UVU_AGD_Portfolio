@@ -113,11 +113,22 @@ public class GameplayChunkSpawner : MonoBehaviour
 
     private void SpawnObstaclePatterns(int chunkIndex, List<BandPlan> plans, List<GameObject> created, HashSet<SpawnCell> usedCells)
     {
-        if (obstaclePrefabs == null || obstaclePrefabs.Length == 0) return;
-        if (plans == null || plans.Count == 0) return;
+        if (obstaclePrefabs == null || obstaclePrefabs.Length == 0)
+        {
+            Debug.LogWarning("No obstacle prefabs assigned.");
+            return;
+        }
+
+        if (plans == null || plans.Count == 0)
+        {
+            Debug.LogWarning("No obstacle plans available.");
+            return;
+        }
 
         int targetPatternCount = Random.Range(obstacleBandsPerChunkMin, obstacleBandsPerChunkMax + 1);
         targetPatternCount = Mathf.Clamp(targetPatternCount, 0, plans.Count);
+
+        Debug.Log($"Chunk {chunkIndex}: trying to place {targetPatternCount} obstacle patterns.");
 
         List<int> availableBands = new();
         for (int i = 0; i < plans.Count; i++)
@@ -398,8 +409,6 @@ public class GameplayChunkSpawner : MonoBehaviour
         if (usedCells.Contains(cell))
             return false;
 
-        usedCells.Add(cell);
-
         Vector3 localPos = new(
             gameplayXOffset + laneX[lane],
             gameplayYOffset + rowY[row],
@@ -410,9 +419,6 @@ public class GameplayChunkSpawner : MonoBehaviour
         GameObject go = Instantiate(prefab, spawnedParent);
         go.transform.localPosition = localPos;
 
-        // By default, preserve the prefab's stored rotation when spawning.
-        // For obstacles we override with randomized rotation and optional scale variation.
-        Quaternion rotation = prefab.transform.localRotation;
         bool isObstacle = prefabs == obstaclePrefabs;
 
         if (isObstacle)
@@ -421,15 +427,25 @@ public class GameplayChunkSpawner : MonoBehaviour
             float rotY = Random.Range(-obstacleRotationVariation.y, obstacleRotationVariation.y);
             float rotZ = Random.Range(-obstacleRotationVariation.z, obstacleRotationVariation.z);
 
-            rotation = Quaternion.Euler(rotX, rotY, rotZ);
+            Quaternion randomOffset = Quaternion.Euler(rotX, rotY, rotZ);
 
-            Vector3 baseScale = go.transform.localScale;
-            float scaleMultiplier = Random.Range(obstacleScaleMin, obstacleScaleMax);
-            go.transform.localScale = baseScale * scaleMultiplier;
+            // Keep prefab base rotation, then add variation
+            go.transform.localRotation = prefab.transform.localRotation * randomOffset;
+
+            float minScale = Mathf.Min(obstacleScaleMin, obstacleScaleMax);
+            float maxScale = Mathf.Max(obstacleScaleMin, obstacleScaleMax);
+            float scaleMultiplier = Random.Range(minScale, maxScale);
+
+            go.transform.localScale = prefab.transform.localScale * scaleMultiplier;
+            Debug.Log($"Obstacle spawned in chunk band {plan.bandIndex}, lane {lane}, row {row}, z {plan.z}");
+        
+        }
+        else
+        {
+            go.transform.localRotation = prefab.transform.localRotation;
         }
 
-        go.transform.localRotation = rotation;
-
+        usedCells.Add(cell);
         created.Add(go);
         return true;
     }

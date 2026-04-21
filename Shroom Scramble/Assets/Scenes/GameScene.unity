@@ -6936,7 +6936,7 @@ MonoBehaviour:
   zBandsPerChunk: 5
   bandEdgePadding: 0.1
   obstaclePrefabs:
-  - {fileID: 2000731156055440544, guid: 54618a3df594ec04aa35d83c5d9a3902, type: 3}
+  - {fileID: 1264131630500614153, guid: 54618a3df594ec04aa35d83c5d9a3902, type: 3}
   collectiblePrefabs:
   - {fileID: 4502900044224939268, guid: 0b4738c8b4de8b44da531769ebdb3d2d, type: 3}
   powerupPrefabs:
