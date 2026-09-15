@@ -1,0 +1,32 @@
+Adobe After Effects v26.0 Windows 64 render log for project “EmoteClip1.aep”
+
+Rendering started on 9/11/2026 at 9:37:11 PM
+
+  9/11/2026 9:37:11 PM: Starting composition “Happy”.
+
+  Output To: C:\Users\zachr\Documents\UVU\UVU_AGD_Portfolio\UnityProject\Assets\MayaProjects\sourceimages\Png_Sequence\Backflip\Happy.mp4    9/11/2026 9:37:13 PM: Finished composition “Happy”.
+
+
+  9/11/2026 9:37:13 PM: Starting composition “Sad”.
+
+  Output To: C:\Users\zachr\Documents\UVU\UVU_AGD_Portfolio\UnityProject\Assets\MayaProjects\sourceimages\Png_Sequence\Backflip\Sad.mp4    9/11/2026 9:37:15 PM: Finished composition “Sad”.
+
+
+  9/11/2026 9:37:15 PM: Starting composition “TryHard”.
+
+  Output To: C:\Users\zachr\Documents\UVU\UVU_AGD_Portfolio\UnityProject\Assets\MayaProjects\sourceimages\Png_Sequence\Backflip\TryHard.mp4    9/11/2026 9:37:16 PM: Finished composition “TryHard”.
+
+
+  9/11/2026 9:37:16 PM: Starting composition “Energetic”.
+
+  Output To: C:\Users\zachr\Documents\UVU\UVU_AGD_Portfolio\UnityProject\Assets\MayaProjects\sourceimages\Png_Sequence\Backflip\Energetic.mp4    9/11/2026 9:37:18 PM: Finished composition “Energetic”.
+
+
+  9/11/2026 9:37:18 PM: Starting composition “Blegh”.
+
+  Output To: C:\Users\zachr\Documents\UVU\UVU_AGD_Portfolio\UnityProject\Assets\MayaProjects\sourceimages\Png_Sequence\Backflip\Blegh.mp4    9/11/2026 9:37:19 PM: Finished composition “Blegh”.
+
+
+  Total Time Elapsed: 8 Seconds
+Log closed on 9/11/2026 at 9:37:19 PM
+
